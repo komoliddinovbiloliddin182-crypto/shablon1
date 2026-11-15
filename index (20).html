@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d1b">
+<title>BotBuilder — Telegram bot platformasi</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+:root{--bg:#080d1b;--panel:#10182b;--panel2:#131f36;--line:#24314d;--muted:#94a3bd;--text:#f3f6ff;--blue:#6d8cff;--cyan:#55e1d0;--purple:#a78bfa;--green:#42d392;--red:#ff7185;--amber:#ffb84d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% -10%,#1b2b55 0,transparent 38%),radial-gradient(ellipse at 90% 10%,#18274a 0,transparent 28%),var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;border:0}
+a{color:#9bb0ff}
+.topbar{height:72px;border-bottom:1px solid #ffffff12;display:flex;align-items:center;justify-content:space-between;padding:0 max(5vw,22px);backdrop-filter:blur(18px);position:sticky;top:0;background:#080d1bd9;z-index:5}
+.brand{display:flex;align-items:center;gap:12px;font:700 19px 'Space Grotesk'} .brand-icon{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--blue),#9a70ff);display:grid;place-items:center;box-shadow:0 8px 24px #6d8cff44;font-size:19px}
+.brand span{color:#8da5ff}
+.top-actions{display:flex;align-items:center;gap:12px}
+.pill{padding:8px 13px;border:1px solid #ffffff1b;border-radius:30px;color:#c6d2eb;font-size:12px;background:#ffffff08;white-space:nowrap}
+.online{display:flex;gap:7px;align-items:center}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+.user-chip{display:flex;align-items:center;gap:9px;padding:7px 13px;border:1px solid var(--line);border-radius:30px;background:#0c1527;font-size:13px}
+.user-chip .admin-badge{font-size:10px;font-weight:700;color:var(--amber);background:#3a2a0e;border:1px solid #6b4a16;padding:2px 8px;border-radius:20px}
+.btn-logout{background:#1a2336;color:#cbd7f2;padding:8px 14px;border-radius:10px;font-size:12px;border:1px solid var(--line)}
+.btn-logout:hover{background:#243049;color:#fff}
+main{max-width:1180px;margin:auto;padding:36px 24px 80px}
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:28px}
+.eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+.hero h1{font:700 clamp(28px,4vw,44px)/1.1 'Space Grotesk';letter-spacing:-1.5px;margin:10px 0}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#83a0ff,#67e6d5);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:580px;line-height:1.7;margin:0}
+.hero-chip{border:1px solid #55e1d044;background:#55e1d00d;color:#7be9d9;border-radius:14px;padding:13px 16px;font-size:13px;white-space:nowrap}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
+.stat{background:linear-gradient(145deg,#121d33,#0e1729);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.stat small{color:var(--muted);font-size:12px}
+.stat strong{display:block;font:700 25px 'Space Grotesk';margin-top:6px}
+.stat-icon{float:right;font-size:18px;opacity:.85}
+.layout{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:start}
+.panel{background:linear-gradient(155deg,#121c31f5,#0e1729f5);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 18px 50px #0002}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}
+.section-head h2{font:600 18px 'Space Grotesk';margin:0}
+.step{font-size:11px;color:#aebcff;background:#6d8cff19;border:1px solid #6d8cff35;padding:5px 10px;border-radius:20px}
+.templates{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.template{padding:15px;text-align:left;border-radius:13px;border:1px solid var(--line);background:#0b1426;color:var(--text);transition:.2s;min-height:108px}
+.template:hover{border-color:#718bff;transform:translateY(-2px)}
+.template.active{border-color:#7791ff;background:linear-gradient(145deg,#25345b,#172541);box-shadow:inset 0 0 0 1px #7791ff33}
+.template .ico{font-size:22px}
+.template b{display:block;margin:8px 0 3px;font-size:13px}
+.template small{color:var(--muted);font-size:11px;line-height:1.45;display:block}
+.field{margin-top:18px}.field label{display:block;font-size:12px;font-weight:700;color:#c8d3e9;margin-bottom:8px}
+.input-wrap{display:flex;gap:9px}
+.input-wrap input,.search,.form-input{width:100%;background:#080f1e;border:1px solid #2b3957;border-radius:11px;color:white;padding:13px 14px;outline:none;min-width:0}
+.input-wrap input:focus,.search:focus,.form-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #6d8cff1c}
+.input-wrap button,.primary{background:linear-gradient(100deg,#6687ff,#8a70ff);color:white;border-radius:11px;padding:0 17px;font-weight:700;white-space:nowrap;box-shadow:0 8px 20px #6d8cff30}
+.primary{padding:12px 16px;width:100%;margin-top:15px}
+.primary:disabled{opacity:.55;cursor:wait}
+.btn-ghost{background:#1a2336;color:#cbd7f2;padding:9px 14px;border-radius:10px;font-size:12px;border:1px solid var(--line)}
+.btn-ghost:hover{background:#243049}
+.hint{font-size:11px;color:#8090ad;line-height:1.6;margin-top:9px}
+.notice{display:none;margin-top:13px;padding:12px 14px;border-radius:11px;font-size:13px;line-height:1.5}
+.notice.show{display:block}
+.notice.success{background:#12392d;border:1px solid #286e54;color:#9af0c9}
+.notice.error{background:#3c1b2a;border:1px solid #7b354a;color:#ffb1bd}
+.notice.info{background:#13203a;border:1px solid #2a4073;color:#9bb0ff}
+.side-panel{position:sticky;top:92px}
+.feature{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid #ffffff10}
+.feature:last-child{border:0}
+.feature-icon{width:36px;height:36px;flex:none;border-radius:11px;background:#6d8cff1b;display:grid;place-items:center}
+.feature b{font-size:13px}.feature p{font-size:11px;color:var(--muted);margin:4px 0 0;line-height:1.5}
+.bot-section{margin-top:22px}
+.bot-toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;margin:18px 0 12px}
+.bot-toolbar h2{font:600 18px 'Space Grotesk';margin:0}
+.search{max-width:240px;padding:10px 12px;font-size:12px}
+.bot-list{display:grid;gap:10px}
+.bot-row{display:flex;justify-content:space-between;align-items:center;gap:14px;background:#0c1527;border:1px solid var(--line);border-radius:13px;padding:14px 16px}
+.bot-id{display:flex;align-items:center;gap:12px;min-width:0}
+.bot-avatar{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#273d70,#334b77);display:grid;place-items:center;font-size:17px;flex:none}
+.bot-meta{min-width:0}.bot-meta b{font-size:13px}
+.bot-meta small{display:block;color:var(--muted);font-size:11px;margin-top:4px;line-height:1.4}
+.bot-actions{display:flex;gap:8px;align-items:center;flex:none}
+.status{font-size:10px;padding:5px 8px;border-radius:30px;white-space:nowrap}
+.status.active{color:#79e9b4;background:#1a4938}
+.status.expired{color:#ff9dac;background:#4b2633}
+.empty{border:1px dashed #344360;border-radius:13px;text-align:center;padding:28px;color:var(--muted);font-size:13px}
+.btn-danger{background:#3c1b2a;color:#ffb1bd;padding:9px 13px;border-radius:10px;font-size:12px;border:1px solid #7b354a}
+.btn-danger:hover{background:#4d2234;color:#fff}
+.btn-manage{background:#1a2a4a;color:#9bb0ff;padding:9px 13px;border-radius:10px;font-size:12px;border:1px solid #2a4073}
+.btn-manage:hover{background:#243a66;color:#fff}
+.owner-tag{font-size:10px;color:var(--amber);background:#2a1f0a;border:1px solid #5a3f12;padding:3px 8px;border-radius:20px}
+.footer{text-align:center;color:#63718d;font-size:11px;margin-top:32px}
+/* Auth view */
+.auth-wrap{max-width:440px;margin:30px auto 0}
+.auth-card{background:linear-gradient(155deg,#121c31f5,#0e1729f5);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:0 18px 50px #0002}
+.auth-tabs{display:flex;gap:8px;background:#0b1426;border:1px solid var(--line);border-radius:12px;padding:5px;margin-bottom:18px}
+.auth-tab{flex:1;background:transparent;color:var(--muted);padding:10px;border-radius:9px;font-weight:600;font-size:13px}
+.auth-tab.active{background:linear-gradient(100deg,#6687ff,#8a70ff);color:#fff}
+.auth-form{display:flex;flex-direction:column;gap:12px}
+.auth-form .form-input{padding:13px 14px}
+.auth-hero{text-align:center;margin-bottom:22px}
+.auth-hero .ico{font-size:40px}
+.auth-hero h1{font:700 26px 'Space Grotesk';margin:12px 0 6px;letter-spacing:-1px}
+.auth-hero p{color:var(--muted);font-size:13px;line-height:1.6;margin:0}
+.first-note{font-size:12px;color:var(--amber);background:#221808;border:1px solid #5a3f12;border-radius:10px;padding:10px 13px;margin-top:6px;line-height:1.5}
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(3,7,15,.78);display:none;z-index:100;backdrop-filter:blur(6px)}
+.modal-overlay.show{display:grid;place-items:center;padding:20px}
+.modal{background:linear-gradient(155deg,#121c31f5,#0e1729f5);border:1px solid var(--line);border-radius:18px;max-width:680px;width:100%;max-height:86vh;overflow-y:auto;padding:24px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.modal-head h3{font:600 18px 'Space Grotesk';margin:0}
+.modal-close{background:#1a2336;color:#cbd7f2;width:32px;height:32px;border-radius:9px;border:1px solid var(--line);font-size:16px}
+.modal-tabs{display:flex;gap:8px;margin-bottom:16px}
+.modal-tab{background:#0b1426;color:var(--muted);padding:8px 14px;border-radius:9px;font-size:12px;border:1px solid var(--line)}
+.modal-tab.active{background:#1a2a4a;color:#9bb0ff;border-color:#2a4073}
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;padding:8px 10px;border-bottom:1px solid var(--line)}
+.data-table td{padding:9px 10px;border-bottom:1px solid #ffffff10;vertical-align:top}
+.data-table tr:last-child td{border-bottom:0}
+.data-list{display:flex;flex-direction:column;gap:8px}
+.data-item{background:#0b1426;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:12px}
+.data-item .row{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.data-item b{font-size:13px}
+.muted{color:var(--muted)}
+.add-product-form{display:grid;grid-template-columns:1fr 120px auto;gap:8px;margin-bottom:14px}
+.add-product-form input{padding:11px 12px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.side-panel{position:static}.hero{flex-direction:column;align-items:flex-start}.hero-chip{margin-top:6px}.stats{gap:9px}.add-product-form{grid-template-columns:1fr}}
+@media(max-width:520px){main{padding:26px 14px 50px}.topbar{padding:0 14px;height:62px}.pill{display:none}.templates{gap:8px}.template{padding:12px;min-height:100px}.panel{padding:17px}.input-wrap{flex-direction:column}.input-wrap button{padding:13px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:span 2}.bot-toolbar{flex-direction:column;align-items:flex-start}.search{max-width:none}.bot-row{flex-direction:column;align-items:flex-start;gap:10px}.bot-actions{width:100%}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-icon">🤖</div>BotBuilder<span>.uz</span></div>
+  <div class="top-actions">
+    <div class="pill online"><i class="dot"></i> Platforma tayyor</div>
+    <div id="userBox" style="display:none">
+      <div class="user-chip">
+        <span>👤 <span id="userLabel"></span></span>
+        <span id="adminBadge" class="admin-badge" style="display:none">ADMIN</span>
+        <button class="btn-logout" id="logoutBtn">Chiqish</button>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+
+<!-- AUTH VIEW -->
+<section id="authView" class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-hero">
+      <div class="ico">🤖</div>
+      <h1>BotBuilder</h1>
+      <p>Telegram botlaringizni bitta paneldan boshqaring. Ro'yxatdan o'ting, bot yarating va uni saytdan boshqaring.</p>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login">Kirish</button>
+      <button class="auth-tab" data-tab="register">Ro'yxatdan o'tish</button>
+    </div>
+    <!-- Login -->
+    <div id="loginForm" class="auth-form">
+      <input class="form-input" id="loginUser" placeholder="Foydalanuvchi nomi" autocomplete="username">
+      <input class="form-input" id="loginPass" type="password" placeholder="Parol" autocomplete="current-password">
+      <button class="primary" id="loginBtn">Kirish</button>
+    </div>
+    <!-- Register -->
+    <div id="registerForm" class="auth-form" style="display:none">
+      <input class="form-input" id="regUser" placeholder="Foydalanuvchi nomi (3-30, harf/raqam/_)" autocomplete="username">
+      <input class="form-input" id="regPass" type="password" placeholder="Parol (min 6)" autocomplete="new-password">
+      <input class="form-input" id="regPass2" type="password" placeholder="Parolni takrorlang" autocomplete="new-password">
+      <button class="primary" id="regBtn">Ro'yxatdan o'tish</button>
+      <div class="first-note">ℹ️ Platformada ro'yxatdan o'tgan <b>birinchi foydalanuvchi avtomatik administrator</b> bo'ladi. Admin barcha botlarni ko'radi va boshqaradi.</div>
+    </div>
+    <div id="authAlert" class="notice"></div>
+  </div>
+</section>
+
+<!-- DASHBOARD VIEW -->
+<section id="dashView" style="display:none">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">TELEGRAM BOT PLATFORMASI</div>
+      <h1>G'oyangizni botga <em>aylantiring.</em></h1>
+      <p>Shablonni tanlang, BotFather tokenini ulang — bot darhol ishga tushadi. Do'kon, yordam markazi, quiz yoki obuna botini daqiqalar ichida yarating.</p>
+    </div>
+    <div class="hero-chip">✦ 3 kunlik bepul sinov · Karta talab qilinmaydi</div>
+  </div>
+
+  <section class="stats">
+    <div class="stat"><span class="stat-icon">🤖</span><small>Mening botlarim</small><strong id="myBotsCount">—</strong></div>
+    <div class="stat"><span class="stat-icon">🟢</span><small>Faol botlarim</small><strong id="myActiveCount">—</strong></div>
+    <div class="stat"><span class="stat-icon">📊</span><small>Platformadagi jami botlar</small><strong id="totalBots">—</strong></div>
+  </section>
+
+  <div class="layout">
+    <section class="panel">
+      <div class="section-head"><h2>Bot yaratish</h2><span class="step">01 / 02</span></div>
+      <div class="templates" id="templates">
+        <button class="template active" data-template="support"><span class="ico">💬</span><b>Yordam markazi</b><small>Mijozlar savollarini qabul qilish (ticket tizimi)</small></button>
+        <button class="template" data-template="shop"><span class="ico">🛍️</span><b>Onlayn do'kon</b><small>Katalog, savat va buyurtma qabul qilish</small></button>
+        <button class="template" data-template="quiz"><span class="ico">🧠</span><b>Quiz / Test</b><small>5 savol, ball va natijalar</small></button>
+        <button class="template" data-template="sub"><span class="ico">🔐</span><b>Obuna boti</b><small>Kanalga obuna yo'riqnomasi</small></button>
+      </div>
+      <div class="field">
+        <label for="botToken">TELEGRAM BOT TOKENI</label>
+        <div class="input-wrap">
+          <input id="botToken" type="password" autocomplete="off" placeholder="123456789:AA...">
+          <button id="toggleToken" type="button" class="btn-ghost">Ko'rsatish</button>
+        </div>
+        <div class="hint">Tokenni <a href="https://t.me/BotFather" target="_blank" rel="noopener">@BotFather</a> orqali <b>/newbot</b> buyrug'i bilan oling. Token maxfiy kalit — uni hech kimga yubormang.</div>
+      </div>
+      <button class="primary" id="launchBtn">🚀 Botni ishga tushirish</button>
+      <div id="alertBox" class="notice" role="status" aria-live="polite"></div>
+    </section>
+
+    <aside class="panel side-panel">
+      <div class="section-head"><h2>Platforma imkoniyatlari</h2><span class="step">FEATURES</span></div>
+      <div class="feature"><div class="feature-icon">⚙️</div><div><b>Avtomatik ishga tushirish</b><p>Token tekshiriladi va bot serverda darhol polling rejimida ishlaydi.</p></div></div>
+      <div class="feature"><div class="feature-icon">🛒</div><div><b>To'liq do'kon boti</b><p>Katalog, savatga qo'shish va buyurtma qabul qilish — hammasi ishlaydi.</p></div></div>
+      <div class="feature"><div class="feature-icon">🔐</div><div><b>Login va boshqaruv</b><p>O'z botingizni saytdan boshqaring: ko'rish, o'chirish, mahsulot qo'shish.</p></div></div>
+      <div class="feature"><div class="feature-icon">📱</div><div><b>Mobilga mos</b><p>Telefon, planshet va kompyuterda qulay ishlaydi.</p></div></div>
+    </aside>
+  </div>
+
+  <!-- My bots -->
+  <section class="bot-section">
+    <div class="bot-toolbar">
+      <h2>📡 Mening botlarim</h2>
+      <input class="search" id="botSearch" placeholder="Bot nomidan qidirish...">
+    </div>
+    <div class="bot-list" id="botsContainer"><div class="empty">Yuklanmoqda...</div></div>
+  </section>
+
+  <!-- Admin: all bots -->
+  <section class="bot-section" id="adminSection" style="display:none">
+    <div class="bot-toolbar">
+      <h2>👑 Barcha botlar (Admin)</h2>
+      <input class="search" id="adminSearch" placeholder="Bot yoki egasi bo'yicha qidirish...">
+    </div>
+    <div class="bot-list" id="adminContainer"><div class="empty">Yuklanmoqda...</div></div>
+  </section>
+
+  <div class="footer">© 2026 BotBuilder.uz · Telegram botlarni boshqarish platformasi</div>
+</section>
+</main>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">Bot boshqaruvi</h3>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+let token=localStorage.getItem('bb_token'), selectedTemplate='support', myBots=[], adminBots=[], currentBot=null;
+
+/* ── API yordamchi ── */
+async function api(path,opts={}){
+  const headers={'Content-Type':'application/json',...(opts.headers||{})};
+  if(token) headers['Authorization']='Bearer '+token;
+  try{
+    const res=await fetch(path,{...opts,headers});
+    const data=await res.json().catch(()=>({}));
+    if(res.status===401){token=null;localStorage.removeItem('bb_token');showAuth();throw new Error(data.detail||'Sessiya tugagan. Qayta kiring.');}
+    return {ok:res.ok,status:res.status,data};
+  }catch(e){throw e;}
+}
+
+/* ── Ko'rinish ── */
+function showAuth(){$('authView').style.display='block';$('dashView').style.display='none';$('userBox').style.display='none';}
+function showDash(){$('authView').style.display='none';$('dashView').style.display='block';$('userBox').style.display='flex';loadAll();}
+function showNotice(el,type,msg){el.className='notice show '+type;el.textContent=msg;}
+
+/* ── Auth ── */
+document.querySelectorAll('.auth-tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.auth-tab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  const isLogin=t.dataset.tab==='login';
+  $('loginForm').style.display=isLogin?'flex':'none';
+  $('registerForm').style.display=isLogin?'none':'flex';
+  $('authAlert').className='notice';
+}));
+
+$('loginBtn').addEventListener('click',doLogin);
+$('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+$('regBtn').addEventListener('click',doRegister);
+$('regPass2').addEventListener('keydown',e=>{if(e.key==='Enter')doRegister();});
+$('logoutBtn').addEventListener('click',doLogout);
+
+async function doLogin(){
+  const u=$('loginUser').value.trim(),p=$('loginPass').value;
+  if(!u||!p){showNotice($('authAlert'),'error','Foydalanuvchi nomi va parolni kiriting.');return;}
+  $('loginBtn').disabled=true;$('loginBtn').textContent='⏳...';
+  try{
+    const {ok,data}=await api('/api/login',{method:'POST',body:JSON.stringify({username:u,password:p})});
+    if(!ok||!data.ok)throw new Error(data.error||'Kirish amalga oshmadi.');
+    token=data.token;localStorage.setItem('bb_token',token);
+    setUser(data.username,data.is_admin);showDash();
+  }catch(e){showNotice($('authAlert'),'error','❌ '+(e.message||'Xatolik.'));}
+  finally{$('loginBtn').disabled=false;$('loginBtn').textContent='Kirish';}
+}
+
+async function doRegister(){
+  const u=$('regUser').value.trim(),p=$('regPass').value,p2=$('regPass2').value;
+  if(!u||!p){showNotice($('authAlert'),'error','Barcha maydonlarni to'ldiring.');return;}
+  if(p!==p2){showNotice($('authAlert'),'error','Parollar mos kelmadi.');return;}
+  if(p.length<6){showNotice($('authAlert'),'error','Parol kamida 6 ta belgi bo'lishi kerak.');return;}
+  $('regBtn').disabled=true;$('regBtn').textContent='⏳...';
+  try{
+    const {ok,data}=await api('/api/register',{method:'POST',body:JSON.stringify({username:u,password:p})});
+    if(!ok||!data.ok)throw new Error(data.error||'Ro'yxatdan o'tish amalga oshmadi.');
+    token=data.token;localStorage.setItem('bb_token',token);
+    setUser(data.username,data.is_admin);
+    let msg=`🎉 Xush kelibsiz, ${data.username}!`;
+    if(data.is_first)msg=`🎉 Siz platformaning birinchi foydalanuvchisiz — ADMINISTRATOR bo'ldingiz!`;
+    showNotice($('authAlert'),'success',msg);
+    setTimeout(showDash,900);
+  }catch(e){showNotice($('authAlert'),'error','❌ '+(e.message||'Xatolik.'));}
+  finally{$('regBtn').disabled=false;$('regBtn').textContent='Ro'yxatdan o'tish';}
+}
+
+async function doLogout(){
+  try{await api('/api/logout',{method:'POST'});}catch(e){}
+  token=null;localStorage.removeItem('bb_token');
+  $('loginUser').value='';$('loginPass').value='';$('regUser').value='';$('regPass').value='';$('regPass2').value='';
+  showAuth();
+}
+
+function setUser(username,isAdmin){
+  $('userLabel').textContent=username;
+  $('adminBadge').style.display=isAdmin?'inline-block':'none';
+}
+
+async function checkSession(){
+  if(!token){showAuth();return;}
+  try{
+    const {ok,data}=await api('/api/me');
+    if(ok){setUser(data.username,data.is_admin);showDash();}
+    else{token=null;localStorage.removeItem('bb_token');showAuth();}
+  }catch(e){showAuth();}
+}
+
+/* ── Bot yaratish ── */
+document.querySelectorAll('.template').forEach(card=>card.addEventListener('click',()=>{
+  document.querySelectorAll('.template').forEach(x=>x.classList.remove('active'));
+  card.classList.add('active');selectedTemplate=card.dataset.template;
+}));
+$('toggleToken').addEventListener('click',()=>{
+  const el=$('botToken');el.type=el.type==='password'?'text':'password';
+  $('toggleToken').textContent=el.type==='password'?'Ko'rsatish':'Yashirish';
+});
+$('launchBtn').addEventListener('click',launchBot);
+$('botToken').addEventListener('keydown',e=>{if(e.key==='Enter')launchBot();});
+
+async function launchBot(){
+  const btn=$('launchBtn'),tok=$('botToken').value.trim();
+  if(!/^\d+:[A-Za-z0-9_-]{20,}$/.test(tok)){showNotice($('alertBox'),'error','Token formati noto'g'ri. @BotFather bergan tokenni tekshiring.');return;}
+  btn.disabled=true;btn.textContent='⏳ Tekshirilmoqda...';
+  try{
+    const {ok,data}=await api('/api/create-bot',{method:'POST',body:JSON.stringify({bot_token:tok,template:selectedTemplate})});
+    if(!ok||!data.ok)throw new Error(data.error||'Bot yaratilmadi.');
+    showNotice($('alertBox'),'success',`🎉 @${data.username} muvaffaqiyatli ulandi! 3 kunlik sinov boshlandi. Telegramda /start yuboring.`);
+    $('botToken').value='';await loadMyBots();
+  }catch(e){showNotice($('alertBox'),'error','❌ '+(e.message||'Server bilan ulanishda xatolik.'));}
+  finally{btn.disabled=false;btn.textContent='🚀 Botni ishga tushirish';}
+}
+
+/* ── Botlar ro'yxati ── */
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+const TPL_LABEL={support:'Yordam markazi',shop:"Onlayn do'kon",quiz:'Quiz / Test',sub:'Obuna boti'};
+const TPL_ICO={support:'💬',shop:'🛍️',quiz:'🧠',sub:'🔐'};
+
+function botRowHtml(b,showOwner){
+  const active=b.is_active;
+  return `<article class="bot-row">
+    <div class="bot-id">
+      <div class="bot-avatar">${TPL_ICO[b.template]||'🤖'}</div>
+      <div class="bot-meta">
+        <b>@${esc(b.username)}</b>
+        <small>${esc(TPL_LABEL[b.template]||b.template)} · Sinov tugashi: ${esc(b.trial_ends_at)}${showOwner&&b.owner?` · Egasi: ${esc(b.owner)}`:''}</small>
+      </div>
+    </div>
+    <div class="bot-actions">
+      <span class="status ${active?'active':'expired'}">${active?'● Faol':'● Tugagan'}</span>
+      <button class="btn-manage" onclick="manageBot(${b.id},'${b.template}')">Boshqarish</button>
+      <button class="btn-danger" onclick="deleteBot(${b.id},'@${esc(b.username)}')">O'chirish</button>
+    </div>
+  </article>`;
+}
+
+function renderMy(){
+  const q=$('botSearch').value.toLowerCase();
+  const filtered=myBots.filter(b=>('@'+b.username).toLowerCase().includes(q)||(TPL_LABEL[b.template]||'').toLowerCase().includes(q));
+  const active=myBots.filter(b=>b.is_active).length;
+  $('myBotsCount').textContent=myBots.length;
+  $('myActiveCount').textContent=active;
+  if(!filtered.length){$('botsContainer').innerHTML=`<div class="empty">${myBots.length?'Qidiruv bo'yicha bot topilmadi.':'Hozircha botingiz yo'q. Yuqorida birinchi botingizni yarating ✨'}</div>`;return;}
+  $('botsContainer').innerHTML=filtered.map(b=>botRowHtml(b,false)).join('');
+}
+
+function renderAdmin(){
+  const q=$('adminSearch').value.toLowerCase();
+  const filtered=adminBots.filter(b=>('@'+b.username).toLowerCase().includes(q)||(b.owner||'').toLowerCase().includes(q)||(TPL_LABEL[b.template]||'').toLowerCase().includes(q));
+  if(!filtered.length){$('adminContainer').innerHTML=`<div class="empty">Botlar yo'q.</div>`;return;}
+  $('adminContainer').innerHTML=filtered.map(b=>botRowHtml(b,true)).join('');
+}
+
+$('botSearch').addEventListener('input',renderMy);
+$('adminSearch').addEventListener('input',renderAdmin);
+
+async function loadMyBots(){
+  try{
+    const {ok,data}=await api('/api/my-bots');
+    if(ok){myBots=data;renderMy();}
+  }catch(e){$('botsContainer').innerHTML='<div class="empty">Botlarni yuklab bo'lmadi.</div>';}
+}
+
+async function loadAdminBots(){
+  try{
+    const {ok,data}=await api('/api/admin/bots');
+    if(ok){adminBots=data;renderAdmin();}
+  }catch(e){$('adminContainer').innerHTML='<div class="empty">Yuklab bo'lmadi.</div>';}
+}
+
+async function loadStats(){
+  try{
+    const r=await fetch('/api/stats');if(!r.ok)throw 0;
+    const d=await r.json();$('totalBots').textContent=d.total_bots;
+  }catch(e){$('totalBots').textContent='—';}
+}
+
+async function loadAll(){await Promise.all([loadMyBots(),loadStats(),loadAdminBots().catch(()=>{})]);}
+
+/* ── O'chirish ── */
+async function deleteBot(id,name){
+  if(!confirm(`${name} botini o'chirmoqchimisiz? Bu amalni qaytarib bo'lmaydi.`))return;
+  try{
+    const {ok,data}=await api(`/api/bots/${id}`,{method:'DELETE'});
+    if(!ok)throw new Error(data.detail||'O'chirilmadi.');
+    await loadMyBots();
+    const me=$('userLabel').textContent;if($('adminBadge').style.display!=='none')await loadAdminBots();
+  }catch(e){alert('Xatolik: '+(e.message||'O'chirilmadi.'));}
+}
+
+/* ── Bot boshqaruvi (modal) ── */
+$('modalClose').addEventListener('click',closeModal);
+$('modalOverlay').addEventListener('click',e=>{if(e.target===$('modalOverlay'))closeModal();});
+
+function closeModal(){$('modalOverlay').classList.remove('show');currentBot=null;}
+function openModal(title){$('modalTitle').textContent=title;$('modalBody').innerHTML='<div class="empty">Yuklanmoqda...</div>';$('modalOverlay').classList.add('show');}
+
+window.manageBot=async function(id,template){
+  currentBot={id,template};
+  const label=TPL_LABEL[template]||template;
+  openModal(`@${label} — boshqarish`);
+  if(template==='shop')return loadShopData(id);
+  if(template==='support')return loadTickets(id);
+  if(template==='quiz')return loadResults(id);
+  $('modalBody').innerHTML=`<div class="empty">Bu shablon uchun alohida boshqaruv paneli yo'q. Bot Telegramda to'liq ishlaydi.</div>`;
+};
+
+async function loadShopData(id){
+  $('modalBody').innerHTML=`
+    <div class="modal-tabs"><button class="modal-tab active" id="tabProd">📦 Mahsulotlar</button><button class="modal-tab" id="tabOrders">🧾 Buyurtmalar</button></div>
+    <div id="prodPanel"></div><div id="ordersPanel" style="display:none"></div>`;
+  $('tabProd').addEventListener('click',()=>{$('tabProd').classList.add('active');$('tabOrders').classList.remove('active');$('prodPanel').style.display='block';$('ordersPanel').style.display='none';});
+  $('tabOrders').addEventListener('click',()=>{$('tabOrders').classList.add('active');$('tabProd').classList.remove('active');$('prodPanel').style.display='none';$('ordersPanel').style.display='block';loadOrders(id);});
+  renderProductForm(id);
+  await loadProducts(id);
+}
+
+function renderProductForm(id){
+  $('prodPanel').innerHTML=`
+    <div class="add-product-form">
+      <input class="form-input" id="pName" placeholder="Mahsulot nomi">
+      <input class="form-input" id="pPrice" type="number" min="0" placeholder="Narx (so'm)">
+      <button class="primary" style="margin:0;padding:12px 14px" id="addProdBtn">+ Qo'shish</button>
+    </div>
+    <input class="form-input" id="pDesc" placeholder="Tavsif (ixtiyoriy)" style="margin-bottom:14px">
+    <div id="prodList"><div class="empty">Yuklanmoqda...</div></div>`;
+  $('addProdBtn').addEventListener('click',()=>addProduct(id));
+}
+
+async function loadProducts(id){
+  try{
+    const {ok,data}=await api(`/api/bots/${id}/products`);
+    if(!ok)throw 0;
+    const el=$('prodList');
+    if(!data.length){el.innerHTML='<div class="empty">Mahsulotlar yo'q. Yuqoridan qo'shing.</div>';return;}
+    el.innerHTML=data.map(p=>`
+      <div class="data-item"><div class="row">
+        <div><b>${esc(p.name)}</b> — ${fmtPrice(p.price)}<br><span class="muted">${esc(p.description||'')}</span></div>
+        <button class="btn-danger" onclick="delProduct(${id},${p.id})">O'chirish</button>
+      </div></div>`).join('');
+  }catch(e){$('prodList').innerHTML='<div class="empty">Yuklab bo'lmadi.</div>';}
+}
+
+async function addProduct(id){
+  const name=$('pName').value.trim(),price=parseInt($('pPrice').value,10),desc=$('pDesc').value.trim();
+  if(!name||isNaN(price)||price<0){alert('Nom va narxni to'g'ri kiriting.');return;}
+  try{
+    const {ok,data}=await api(`/api/bots/${id}/products`,{method:'POST',body:JSON.stringify({name,price,description:desc})});
+    if(!ok)throw new Error(data.detail||'Qo'shilmadi.');
+    $('pName').value='';$('pPrice').value='';$('pDesc').value='';
+    await loadProducts(id);
+  }catch(e){alert('Xatolik: '+(e.message||'Qo'shilmadi.'));}
+}
+
+window.delProduct=async function(botId,pid){
+  if(!confirm('Mahsulotni o'chirish?'))return;
+  try{
+    const {ok}=await api(`/api/bots/${botId}/products/${pid}`,{method:'DELETE'});
+    if(!ok)throw 0;
+    await loadProducts(botId);
+  }catch(e){alert('O'chirilmadi.');}
+};
+
+async function loadOrders(id){
+  try{
+    const {ok,data}=await api(`/api/bots/${id}/orders`);
+    if(!ok)throw 0;
+    const el=$('ordersPanel');
+    if(!data.length){el.innerHTML='<div class="empty">Buyurtmalar yo'q.</div>';return;}
+    el.innerHTML='<div class="data-list">'+data.map(o=>`
+      <div class="data-item">
+        <div class="row"><b>Buyurtma №${o.id}</b><span class="status ${o.status==='new'?'active':'expired'}">${esc(o.status)}</span></div>
+        <div class="muted" style="margin-top:6px">👤 ${esc(o.customer_name||'-')} · 📞 ${esc(o.customer_phone||'-')}</div>
+        <div class="muted" style="margin-top:4px">${esc(o.tg_username||'-')}</div>
+        <div style="margin-top:6px">${(o.items||[]).map(i=>`• ${esc(i.name)} ×${i.qty} = ${fmtPrice(i.price*i.qty)}`).join('<br>')}</div>
+        <div style="margin-top:6px"><b>Jami: ${fmtPrice(o.total)}</b></div>
+      </div>`).join('')+'</div>';
+  }catch(e){$('ordersPanel').innerHTML='<div class="empty">Yuklab bo'lmadi.</div>';}
+}
+
+async function loadTickets(id){
+  try{
+    const {ok,data}=await api(`/api/bots/${id}/tickets`);
+    if(!ok)throw 0;
+    if(!data.length){$('modalBody').innerHTML='<div class="empty">Hozircha ticketlar yo'q.</div>';return;}
+    $('modalBody').innerHTML='<div class="data-list">'+data.map(t=>`
+      <div class="data-item">
+        <div class="row"><b>Ticket №${t.ticket_no}</b><span class="status ${t.status==='open'?'active':'expired'}">${esc(t.status)}</span></div>
+        <div class="muted" style="margin-top:6px">👤 ${esc(t.tg_username||'-')}</div>
+        <div style="margin-top:6px">${esc(t.message)}</div>
+      </div>`).join('')+'</div>';
+  }catch(e){$('modalBody').innerHTML='<div class="empty">Yuklab bo'lmadi.</div>';}
+}
+
+async function loadResults(id){
+  try{
+    const {ok,data}=await api(`/api/bots/${id}/results`);
+    if(!ok)throw 0;
+    if(!data.length){$('modalBody').innerHTML='<div class="empty">Hozircha natijalar yo'q.</div>';return;}
+    $('modalBody').innerHTML='<div class="data-list">'+data.map(r=>`
+      <div class="data-item">
+        <div class="row"><b>👤 ${esc(r.tg_username||'Foydalanuvchi')}</b><span class="status active">${r.score}/${r.total}</span></div>
+        <div class="muted" style="margin-top:4px">${esc((r.created_at||'').slice(0,16).replace('T',' '))}</div>
+      </div>`).join('')+'</div>';
+  }catch(e){$('modalBody').innerHTML='<div class="empty">Yuklab bo'lmadi.</div>';}
+}
+
+function fmtPrice(p){return String(p).replace(/\B(?=(\d{3})+(?!\d))/g,' ')+' so'm';}
+
+/* ── Init ── */
+checkSession();
+</script>
+</body>
+</html>
