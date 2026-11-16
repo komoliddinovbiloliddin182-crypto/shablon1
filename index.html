@@ -120,8 +120,99 @@ main{max-width:1180px;margin:auto;padding:36px 24px 80px}
 .muted{color:var(--muted)}
 .add-product-form{display:grid;grid-template-columns:1fr 120px auto;gap:8px;margin-bottom:14px}
 .add-product-form input{padding:11px 12px}
-@media(max-width:800px){.layout{grid-template-columns:1fr}.side-panel{position:static}.hero{flex-direction:column;align-items:flex-start}.hero-chip{margin-top:6px}.stats{gap:9px}.add-product-form{grid-template-columns:1fr}}
+/* Admin panel */
+.admin-wrap{margin-top:22px}
+.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;background:#0b1426;border:1px solid var(--line);border-radius:13px;padding:6px;margin-bottom:16px;position:sticky;top:84px;z-index:4}
+.admin-tab{background:transparent;color:var(--muted);padding:9px 14px;border-radius:9px;font-weight:600;font-size:12px;border:1px solid transparent;white-space:nowrap}
+.admin-tab:hover{color:#c8d3e9}
+.admin-tab.active{background:linear-gradient(100deg,#6687ff,#8a70ff);color:#fff;box-shadow:0 4px 12px #6d8cff30}
+.admin-pane{display:none}.admin-pane.active{display:block}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.astat{background:linear-gradient(145deg,#121d33,#0e1729);border:1px solid var(--line);border-radius:13px;padding:14px 16px}
+.astat small{color:var(--muted);font-size:11px}
+.astat strong{display:block;font:700 22px 'Space Grotesk';margin-top:4px}
+.astat .sub{font-size:11px;color:var(--muted);margin-top:3px}
+.tpl-bar{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:12px}
+.tpl-bar .label{min-width:110px;color:var(--muted)}
+.tpl-bar .bar-track{flex:1;height:8px;background:#0b1426;border-radius:5px;overflow:hidden}
+.tpl-bar .bar-fill{height:100%;background:linear-gradient(90deg,#6687ff,#8a70ff)}
+.tpl-bar .num{min-width:30px;text-align:right;font-weight:700}
+.users-table{width:100%;border-collapse:collapse;font-size:12px}
+.users-table th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;padding:10px 12px;border-bottom:1px solid var(--line)}
+.users-table td{padding:11px 12px;border-bottom:1px solid #ffffff10;vertical-align:middle}
+.users-table tr:last-child td{border-bottom:0}
+.badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px}
+.badge.admin{color:var(--amber);background:#2a1f0a;border:1px solid #5a3f12}
+.badge.blocked{color:#ff9dac;background:#4b2633;border:1px solid #7b354a}
+.badge.site-admin{color:var(--cyan);background:#0e2b33;border:1px solid #1f5a66}
+.btn-sm{padding:6px 10px;border-radius:8px;font-size:11px;border:1px solid var(--line);background:#1a2336;color:#cbd7f2}
+.btn-sm:hover{background:#243049;color:#fff}
+.btn-sm.danger{background:#3c1b2a;color:#ffb1bd;border-color:#7b354a}
+.btn-sm.danger:hover{background:#4d2234;color:#fff}
+.btn-sm.warn{background:#2a2310;color:#ffd49a;border-color:#5a4a16}
+.btn-sm.warn:hover{background:#3a3116;color:#fff}
+.btn-sm:disabled{opacity:.4;cursor:not-allowed}
+.orders-table,.tickets-table,.results-table{width:100%;border-collapse:collapse;font-size:12px}
+.orders-table th,.tickets-table th,.results-table th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;padding:8px 10px;border-bottom:1px solid var(--line)}
+.orders-table td,.tickets-table td,.results-table td{padding:8px 10px;border-bottom:1px solid #ffffff10;vertical-align:top}
+.orders-table tr:last-child td,.tickets-table tr:last-child td,.results-table tr:last-child td{border-bottom:0}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.side-panel{position:static}.hero{flex-direction:column;align-items:flex-start}.hero-chip{margin-top:6px}.stats{gap:9px}.add-product-form{grid-template-columns:1fr}.admin-tabs{position:static}.users-table th:nth-child(3),.users-table td:nth-child(3){display:none}}
 @media(max-width:520px){main{padding:26px 14px 50px}.topbar{padding:0 14px;height:62px}.pill{display:none}.templates{gap:8px}.template{padding:12px;min-height:100px}.panel{padding:17px}.input-wrap{flex-direction:column}.input-wrap button{padding:13px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:span 2}.bot-toolbar{flex-direction:column;align-items:flex-start}.search{max-width:none}.bot-row{flex-direction:column;align-items:flex-start;gap:10px}.bot-actions{width:100%}}
+/* Balance + messaging */
+.balance-chip{display:flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid #2a4073;border-radius:30px;background:linear-gradient(100deg,#0e1d3a,#13284a);color:#ffd49a;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+.balance-chip:hover{border-color:#5581e6;color:#fff}
+.balance-chip .coin{font-size:14px}
+.iconbtn{position:relative;background:#1a2336;color:#cbd7f2;width:38px;height:38px;border-radius:11px;border:1px solid var(--line);font-size:16px;display:grid;place-items:center}
+.iconbtn:hover{background:#243049;color:#fff}
+.iconbtn .badge-count{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:var(--red);color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center;border:2px solid #080d1b}
+.pricing-box{margin-top:14px;padding:12px 14px;border:1px solid #2a4073;border-radius:11px;background:#0c1a33;font-size:12px;line-height:1.6}
+.pricing-box b{color:#ffd49a}
+.pricing-box .free{color:var(--green);font-weight:700}
+.drop-area{border:2px dashed #344360;border-radius:12px;padding:22px;text-align:center;color:var(--muted);font-size:12px;cursor:pointer;transition:.2s;background:#0b1426}
+.drop-area:hover{border-color:var(--blue);color:#c8d3e9}
+.drop-area.has-file{border-color:var(--green);color:#9af0c9;background:#0e2a22}
+.drop-area input{display:none}
+.check-preview{max-width:100%;max-height:200px;border-radius:10px;margin-top:10px;border:1px solid var(--line)}
+.topup-row{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#0b1426;border:1px solid var(--line);border-radius:10px;padding:10px 13px;margin-bottom:7px;font-size:12px}
+.topup-row .amt{font-weight:700;font-size:14px}
+.status-tag{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.status-tag.pending{color:#ffd49a;background:#2a2310;border:1px solid #5a4a16}
+.status-tag.approved{color:#79e9b4;background:#1a4938;border:1px solid #286e54}
+.status-tag.rejected{color:#ff9dac;background:#4b2633;border:1px solid #7b354a}
+.paid-badge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:6px}
+.paid-badge.free{color:#79e9b4;background:#1a4938;border:1px solid #286e54}
+.paid-badge.paid{color:#9bb0ff;background:#13203a;border:1px solid #2a4073}
+/* Inbox + chat */
+.inbox-section{margin-bottom:18px}
+.inbox-section h4{font:600 13px 'Space Grotesk';margin:0 0 10px;color:#c8d3e9}
+.broadcast-item{background:#0b1426;border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-bottom:7px;font-size:12px;line-height:1.55}
+.broadcast-item .meta{color:var(--amber);font-size:10px;margin-bottom:4px;font-weight:700}
+.chat-thread{display:flex;flex-direction:column;gap:10px;max-height:340px;overflow-y:auto;padding:6px 4px;margin-bottom:12px}
+.chat-bubble{max-width:78%;padding:9px 13px;border-radius:13px;font-size:13px;line-height:1.5;word-wrap:break-word}
+.chat-bubble.mine{align-self:flex-end;background:linear-gradient(100deg,#6687ff,#8a70ff);color:#fff;border-bottom-right-radius:3px}
+.chat-bubble.theirs{align-self:flex-start;background:#0b1426;border:1px solid var(--line);border-bottom-left-radius:3px}
+.chat-bubble .ts{display:block;font-size:9px;opacity:.7;margin-top:3px}
+.chat-input-row{display:flex;gap:8px}
+.chat-input-row input{flex:1}
+.chat-threads-list{display:flex;flex-direction:column;gap:8px}
+.thread-item{display:flex;align-items:center;gap:12px;background:#0b1426;border:1px solid var(--line);border-radius:11px;padding:11px 13px;cursor:pointer;transition:.2s}
+.thread-item:hover{border-color:var(--blue);background:#0f1d38}
+.thread-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#273d70,#334b77);display:grid;place-items:center;font-weight:700;flex:none}
+.thread-meta{flex:1;min-width:0}
+.thread-meta b{font-size:13px}
+.thread-meta small{display:block;color:var(--muted);font-size:11px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.thread-unread{min-width:18px;height:18px;border-radius:9px;background:var(--red);color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center;padding:0 5px}
+/* Settings + broadcast forms */
+.settings-grid{display:grid;gap:14px;grid-template-columns:1fr 1fr;max-width:560px}
+.settings-field label{display:block;font-size:11px;font-weight:700;color:#c8d3e9;margin-bottom:6px}
+.settings-field .hint-s{font-size:10px;color:var(--muted);margin-top:4px}
+.broadcast-compose{display:flex;gap:8px;margin-bottom:14px}
+.broadcast-compose input{flex:1}
+.broadcast-list-item{background:#0b1426;border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-bottom:7px;font-size:12px;line-height:1.55}
+.broadcast-list-item .meta{color:var(--muted);font-size:10px;margin-bottom:4px}
+.topup-check-cell{display:flex;align-items:center;gap:8px}
+.check-thumb{width:42px;height:42px;border-radius:8px;object-fit:cover;border:1px solid var(--line);cursor:pointer;background:#0b1426}
+.check-thumb:hover{border-color:var(--blue)}
 </style>
 </head>
 <body>
@@ -130,6 +221,8 @@ main{max-width:1180px;margin:auto;padding:36px 24px 80px}
   <div class="top-actions">
     <div class="pill online"><i class="dot"></i> Platforma tayyor</div>
     <div id="userBox" style="display:none">
+      <button class="iconbtn" id="inboxBtn" title="Xabarlar">📨<span class="badge-count" id="inboxBadge" style="display:none">0</span></button>
+      <div class="balance-chip" id="balanceChip" title="Hisobni to’ldirish"><span class="coin">💰</span><span id="balanceLabel">— so’m</span></div>
       <div class="user-chip">
         <span>👤 <span id="userLabel"></span></span>
         <span id="adminBadge" class="admin-badge" style="display:none">ADMIN</span>
@@ -146,11 +239,11 @@ main{max-width:1180px;margin:auto;padding:36px 24px 80px}
     <div class="auth-hero">
       <div class="ico">🤖</div>
       <h1>BotBuilder</h1>
-      <p>Telegram botlaringizni bitta paneldan boshqaring. Ro'yxatdan o'ting, bot yarating va uni saytdan boshqaring.</p>
+      <p>Telegram botlaringizni bitta paneldan boshqaring. Ro’yxatdan o’ting, bot yarating va uni saytdan boshqaring.</p>
     </div>
     <div class="auth-tabs">
       <button class="auth-tab active" data-tab="login">Kirish</button>
-      <button class="auth-tab" data-tab="register">Ro'yxatdan o'tish</button>
+      <button class="auth-tab" data-tab="register">Ro’yxatdan o’tish</button>
     </div>
     <!-- Login -->
     <div id="loginForm" class="auth-form">
@@ -163,8 +256,8 @@ main{max-width:1180px;margin:auto;padding:36px 24px 80px}
       <input class="form-input" id="regUser" placeholder="Foydalanuvchi nomi (3-30, harf/raqam/_)" autocomplete="username">
       <input class="form-input" id="regPass" type="password" placeholder="Parol (min 6)" autocomplete="new-password">
       <input class="form-input" id="regPass2" type="password" placeholder="Parolni takrorlang" autocomplete="new-password">
-      <button class="primary" id="regBtn">Ro'yxatdan o'tish</button>
-      <div class="first-note">ℹ️ Platformada ro'yxatdan o'tgan <b>birinchi foydalanuvchi avtomatik administrator</b> bo'ladi. Admin barcha botlarni ko'radi va boshqaradi.</div>
+      <button class="primary" id="regBtn">Ro’yxatdan o’tish</button>
+      <div class="first-note">ℹ️ Sayt admini doimiy hisob: <b>admin</b>. Oddiy foydalanuvchi sifatida ro’yxatdan o’ting va o’z botlaringizni boshqaring.</div>
     </div>
     <div id="authAlert" class="notice"></div>
   </div>
@@ -175,8 +268,8 @@ main{max-width:1180px;margin:auto;padding:36px 24px 80px}
   <div class="hero">
     <div>
       <div class="eyebrow">TELEGRAM BOT PLATFORMASI</div>
-      <h1>G'oyangizni botga <em>aylantiring.</em></h1>
-      <p>Shablonni tanlang, BotFather tokenini ulang — bot darhol ishga tushadi. Do'kon, yordam markazi, quiz yoki obuna botini daqiqalar ichida yarating.</p>
+      <h1>G’oyangizni botga <em>aylantiring.</em></h1>
+      <p>Shablonni tanlang, BotFather tokenini ulang — bot darhol ishga tushadi. Do’kon, yordam markazi, quiz yoki obuna botini daqiqalar ichida yarating.</p>
     </div>
     <div class="hero-chip">✦ 3 kunlik bepul sinov · Karta talab qilinmaydi</div>
   </div>
@@ -192,27 +285,33 @@ main{max-width:1180px;margin:auto;padding:36px 24px 80px}
       <div class="section-head"><h2>Bot yaratish</h2><span class="step">01 / 02</span></div>
       <div class="templates" id="templates">
         <button class="template active" data-template="support"><span class="ico">💬</span><b>Yordam markazi</b><small>Mijozlar savollarini qabul qilish (ticket tizimi)</small></button>
-        <button class="template" data-template="shop"><span class="ico">🛍️</span><b>Onlayn do'kon</b><small>Katalog, savat va buyurtma qabul qilish</small></button>
+        <button class="template" data-template="shop"><span class="ico">🛍️</span><b>Onlayn do’kon</b><small>Katalog, savat va buyurtma qabul qilish</small></button>
         <button class="template" data-template="quiz"><span class="ico">🧠</span><b>Quiz / Test</b><small>5 savol, ball va natijalar</small></button>
-        <button class="template" data-template="sub"><span class="ico">🔐</span><b>Obuna boti</b><small>Kanalga obuna yo'riqnomasi</small></button>
+        <button class="template" data-template="sub"><span class="ico">🔐</span><b>Obuna boti</b><small>Kanalga obuna yo’riqnomasi</small></button>
       </div>
       <div class="field">
         <label for="botToken">TELEGRAM BOT TOKENI</label>
         <div class="input-wrap">
           <input id="botToken" type="password" autocomplete="off" placeholder="123456789:AA...">
-          <button id="toggleToken" type="button" class="btn-ghost">Ko'rsatish</button>
+          <button id="toggleToken" type="button" class="btn-ghost">Ko’rsatish</button>
         </div>
-        <div class="hint">Tokenni <a href="https://t.me/BotFather" target="_blank" rel="noopener">@BotFather</a> orqali <b>/newbot</b> buyrug'i bilan oling. Token maxfiy kalit — uni hech kimga yubormang.</div>
+        <div class="hint">Tokenni <a href="https://t.me/BotFather" target="_blank" rel="noopener">@BotFather</a> orqali <b>/newbot</b> buyrug’i bilan oling. Token maxfiy kalit — uni hech kimga yubormang.</div>
       </div>
       <button class="primary" id="launchBtn">🚀 Botni ishga tushirish</button>
       <div id="alertBox" class="notice" role="status" aria-live="polite"></div>
+      <div class="pricing-box" id="pricingBox">
+        <b>💰 Narxlar:</b>
+        <span class="free">1-bot bepul</span> · <span id="pricingTrial">3 kun</span> sinov muddati.
+        Keyingi botlar — <b id="pricingPrice">50 000 so’m</b> (admin paneldan o’rnatiladi) va <span id="pricingPaid">30 kun</span> amal qiladi.
+        <div class="hint-s" style="margin-top:6px;color:var(--muted);font-size:10px">Pullik botlar balansdan yechiladi. Hisobni «💰 balans» tugmasi orqali to’ldiring.</div>
+      </div>
     </section>
 
     <aside class="panel side-panel">
       <div class="section-head"><h2>Platforma imkoniyatlari</h2><span class="step">FEATURES</span></div>
       <div class="feature"><div class="feature-icon">⚙️</div><div><b>Avtomatik ishga tushirish</b><p>Token tekshiriladi va bot serverda darhol polling rejimida ishlaydi.</p></div></div>
-      <div class="feature"><div class="feature-icon">🛒</div><div><b>To'liq do'kon boti</b><p>Katalog, savatga qo'shish va buyurtma qabul qilish — hammasi ishlaydi.</p></div></div>
-      <div class="feature"><div class="feature-icon">🔐</div><div><b>Login va boshqaruv</b><p>O'z botingizni saytdan boshqaring: ko'rish, o'chirish, mahsulot qo'shish.</p></div></div>
+      <div class="feature"><div class="feature-icon">🛒</div><div><b>To’liq do’kon boti</b><p>Katalog, savatga qo’shish va buyurtma qabul qilish — hammasi ishlaydi.</p></div></div>
+      <div class="feature"><div class="feature-icon">🔐</div><div><b>Login va boshqaruv</b><p>O’z botingizni saytdan boshqaring: ko’rish, o’chirish, mahsulot qo’shish.</p></div></div>
       <div class="feature"><div class="feature-icon">📱</div><div><b>Mobilga mos</b><p>Telefon, planshet va kompyuterda qulay ishlaydi.</p></div></div>
     </aside>
   </div>
@@ -226,13 +325,122 @@ main{max-width:1180px;margin:auto;padding:36px 24px 80px}
     <div class="bot-list" id="botsContainer"><div class="empty">Yuklanmoqda...</div></div>
   </section>
 
-  <!-- Admin: all bots -->
-  <section class="bot-section" id="adminSection" style="display:none">
-    <div class="bot-toolbar">
-      <h2>👑 Barcha botlar (Admin)</h2>
-      <input class="search" id="adminSearch" placeholder="Bot yoki egasi bo'yicha qidirish...">
+  <!-- Admin panel -->
+  <section class="admin-wrap" id="adminSection" style="display:none">
+    <div class="bot-toolbar" style="margin-top:8px">
+      <h2>👑 Admin panel</h2>
+      <button class="btn-ghost" id="adminRefresh" style="padding:8px 13px">🔄 Yangilash</button>
     </div>
-    <div class="bot-list" id="adminContainer"><div class="empty">Yuklanmoqda...</div></div>
+    <div class="admin-tabs" id="adminTabs">
+      <button class="admin-tab active" data-pane="stats">📊 Statistika</button>
+      <button class="admin-tab" data-pane="users">👥 Foydalanuvchilar</button>
+      <button class="admin-tab" data-pane="bots">📡 Botlar</button>
+      <button class="admin-tab" data-pane="orders">📦 Buyurtmalar</button>
+      <button class="admin-tab" data-pane="tickets">🎫 Ticketlar</button>
+      <button class="admin-tab" data-pane="results">🏆 Natijalar</button>
+      <button class="admin-tab" data-pane="topups">💳 To’lovlar <span class="badge-count" id="pendingBadge" style="display:none">0</span></button>
+      <button class="admin-tab" data-pane="settings">⚙️ Sozlamalar</button>
+      <button class="admin-tab" data-pane="broadcasts">📢 Xabarlar</button>
+      <button class="admin-tab" data-pane="chats">💬 Suhbatlar <span class="badge-count" id="chatBadge" style="display:none">0</span></button>
+    </div>
+
+    <!-- Stats pane -->
+    <div class="admin-pane active" id="pane-stats">
+      <div class="admin-stats" id="adminStatsGrid"><div class="empty">Yuklanmoqda...</div></div>
+      <div class="panel" style="padding:18px 20px;margin-top:6px">
+        <div class="section-head" style="margin-bottom:12px"><h2 style="font-size:15px">Shablonlar bo’yicha botlar</h2></div>
+        <div id="tplBars"><div class="empty">Yuklanmoqda...</div></div>
+      </div>
+    </div>
+
+    <!-- Users pane -->
+    <div class="admin-pane" id="pane-users">
+      <div class="bot-toolbar"><input class="search" id="adminUserSearch" placeholder="Foydalanuvchi bo’yicha qidirish..." style="max-width:280px"></div>
+      <div id="usersContainer"><div class="empty">Yuklanmoqda...</div></div>
+    </div>
+
+    <!-- Bots pane -->
+    <div class="admin-pane" id="pane-bots">
+      <div class="bot-toolbar"><input class="search" id="adminBotSearch" placeholder="Bot yoki egasi bo’yicha qidirish..." style="max-width:280px"></div>
+      <div class="bot-list" id="adminBotsContainer"><div class="empty">Yuklanmoqda...</div></div>
+    </div>
+
+    <!-- Orders pane -->
+    <div class="admin-pane" id="pane-orders">
+      <div class="bot-toolbar"><input class="search" id="adminOrderSearch" placeholder="Mijoz yoki bot bo’yicha qidirish..." style="max-width:300px"></div>
+      <div id="adminOrdersContainer"><div class="empty">Yuklanmoqda...</div></div>
+    </div>
+
+    <!-- Tickets pane -->
+    <div class="admin-pane" id="pane-tickets">
+      <div class="bot-toolbar"><input class="search" id="adminTicketSearch" placeholder="Mijoz yoki bot bo’yicha qidirish..." style="max-width:300px"></div>
+      <div id="adminTicketsContainer"><div class="empty">Yuklanmoqda...</div></div>
+    </div>
+
+    <!-- Results pane -->
+    <div class="admin-pane" id="pane-results">
+      <div class="bot-toolbar"><input class="search" id="adminResultSearch" placeholder="Mijoz yoki bot bo’yicha qidirish..." style="max-width:300px"></div>
+      <div id="adminResultsContainer"><div class="empty">Yuklanmoqda...</div></div>
+    </div>
+
+    <!-- Topups pane -->
+    <div class="admin-pane" id="pane-topups">
+      <div class="bot-toolbar">
+        <div class="admin-tabs" style="position:static;padding:0;background:transparent;border:0">
+          <button class="admin-tab active" data-topup-filter="all" id="tfAll">Barchasi</button>
+          <button class="admin-tab" data-topup-filter="pending" id="tfPending">⏳ Kutilmoqda</button>
+          <button class="admin-tab" data-topup-filter="approved" id="tfApproved">✅ Tasdiqlangan</button>
+          <button class="admin-tab" data-topup-filter="rejected" id="tfRejected">❌ Rad etilgan</button>
+        </div>
+      </div>
+      <div id="adminTopupsContainer"><div class="empty">Yuklanmoqda...</div></div>
+    </div>
+
+    <!-- Settings pane -->
+    <div class="admin-pane" id="pane-settings">
+      <div class="panel" style="padding:20px">
+        <div class="section-head" style="margin-bottom:14px"><h2 style="font-size:15px">⚙️ Narx va muddat sozlamalari</h2></div>
+        <div class="settings-grid">
+          <div class="settings-field">
+            <label for="setBotPrice">Bot narxi (so’m)</label>
+            <input class="form-input" id="setBotPrice" type="number" min="0" placeholder="50000">
+            <div class="hint-s">2-bot va undan keyingi botlar uchun (1-bot bepul).</div>
+          </div>
+          <div class="settings-field">
+            <label for="setTrialDays">1-bot bepul sinov (kun)</label>
+            <input class="form-input" id="setTrialDays" type="number" min="0" max="365" placeholder="3">
+            <div class="hint-s">Faqat birinchi bot uchun.</div>
+          </div>
+          <div class="settings-field">
+            <label for="setPaidDays">Pullik bot amal muddati (kun)</label>
+            <input class="form-input" id="setPaidDays" type="number" min="1" max="3650" placeholder="30">
+            <div class="hint-s">Pullik bot shuncha kun ishlaydi.</div>
+          </div>
+        </div>
+        <button class="primary" id="saveSettingsBtn" style="max-width:280px;margin-top:16px">💾 Saqlash</button>
+        <div id="settingsAlert" class="notice" style="margin-top:12px"></div>
+      </div>
+    </div>
+
+    <!-- Broadcasts pane -->
+    <div class="admin-pane" id="pane-broadcasts">
+      <div class="panel" style="padding:20px">
+        <div class="section-head" style="margin-bottom:14px"><h2 style="font-size:15px">📢 Barchaga xabar yuborish</h2></div>
+        <div class="broadcast-compose">
+          <input class="form-input" id="broadcastInput" placeholder="Xabar matnini kiriting (barcha foydalanuvchilarga boradi)...">
+          <button class="primary" id="sendBroadcastBtn" style="max-width:160px;margin:0">📨 Yuborish</button>
+        </div>
+        <div id="broadcastAlert" class="notice" style="margin-top:0;margin-bottom:14px"></div>
+        <div class="section-head" style="margin:14px 0 10px"><h2 style="font-size:14px">Yuborilgan xabarlar</h2></div>
+        <div id="broadcastsContainer"><div class="empty">Yuklanmoqda...</div></div>
+      </div>
+    </div>
+
+    <!-- Chats pane -->
+    <div class="admin-pane" id="pane-chats">
+      <div class="bot-toolbar"><input class="search" id="adminChatSearch" placeholder="Foydalanuvchi bo’yicha qidirish..." style="max-width:280px"></div>
+      <div id="adminChatsContainer" class="chat-threads-list"><div class="empty">Yuklanmoqda...</div></div>
+    </div>
   </section>
 
   <div class="footer">© 2026 BotBuilder.uz · Telegram botlarni boshqarish platformasi</div>
@@ -251,528 +459,900 @@ main{max-width:1180px;margin:auto;padding:36px 24px 80px}
 </div>
 
 <script>
-const $ = id => document.getElementById(id);
-let token = localStorage.getItem('bb_token');
-let selectedTemplate = 'support';
-let myBots = [];
-let adminBots = [];
-let currentBot = null;
+const $=id=>document.getElementById(id);
+let token=localStorage.getItem('bb_token'), selectedTemplate='support', myBots=[], adminBots=[], adminUsers=[], adminStats=null, adminOrders=[], adminTickets=[], adminResults=[], currentBot=null, adminTab='stats';
+let myBalance=0, myTopups=[], inboxData=null, chatMessages=[], adminTopups=[], topupFilter='all', adminSettings=null, adminBroadcasts=[], adminChats=[], chatPartner=null, pricingInfo=null;
 
 /* ── API yordamchi ── */
-async function api(path, opts = {}) {
-  const headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
-  if (token) headers['Authorization'] = 'Bearer ' + token;
-  try {
-    const res = await fetch(path, { ...opts, headers });
-    const data = await res.json().catch(() => ({}));
-    if (res.status === 401) {
-      token = null;
-      localStorage.removeItem('bb_token');
-      showAuth();
-      throw new Error(data.detail || 'Sessiya tugagan. Qayta kiring.');
-    }
-    return { ok: res.ok, status: res.status, data };
-  } catch (e) {
-    throw e;
-  }
+async function api(path,opts={}){
+  const headers={'Content-Type':'application/json',...(opts.headers||{})};
+  if(token) headers['Authorization']='Bearer '+token;
+  try{
+    const res=await fetch(path,{...opts,headers});
+    const data=await res.json().catch(()=>({}));
+    if(res.status===401){token=null;localStorage.removeItem('bb_token');showAuth();throw new Error(data.detail||'Sessiya tugagan. Qayta kiring.');}
+    return {ok:res.ok,status:res.status,data};
+  }catch(e){throw e;}
+}
+/* Multipart form uchun (fayl yuklash). */
+async function apiForm(path,formData){
+  const headers={};
+  if(token) headers['Authorization']='Bearer '+token;
+  try{
+    const res=await fetch(path,{method:'POST',headers,body:formData});
+    const data=await res.json().catch(()=>({}));
+    if(res.status===401){token=null;localStorage.removeItem('bb_token');showAuth();throw new Error(data.detail||'Sessiya tugagan.');}
+    return {ok:res.ok,status:res.status,data};
+  }catch(e){throw e;}
 }
 
-/* ── Ko'rinish ── */
-function showAuth() {
-  $('authView').style.display = 'block';
-  $('dashView').style.display = 'none';
-  $('userBox').style.display = 'none';
-}
-function showDash() {
-  $('authView').style.display = 'none';
-  $('dashView').style.display = 'block';
-  $('userBox').style.display = 'flex';
-  loadAll();
-}
-function showNotice(el, type, msg) {
-  el.className = 'notice show ' + type;
-  el.textContent = msg;
-}
+/* ── Ko’rinish ── */
+function showAuth(){$('authView').style.display='block';$('dashView').style.display='none';$('userBox').style.display='none';}
+function showDash(){$('authView').style.display='none';$('dashView').style.display='block';$('userBox').style.display='flex';loadAll();}
+function showNotice(el,type,msg){el.className='notice show '+type;el.textContent=msg;}
 
 /* ── Auth ── */
-document.querySelectorAll('.auth-tab').forEach(t => t.addEventListener('click', () => {
-  document.querySelectorAll('.auth-tab').forEach(x => x.classList.remove('active'));
+document.querySelectorAll('.auth-tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.auth-tab').forEach(x=>x.classList.remove('active'));
   t.classList.add('active');
-  const isLogin = t.dataset.tab === 'login';
-  $('loginForm').style.display = isLogin ? 'flex' : 'none';
-  $('registerForm').style.display = isLogin ? 'none' : 'flex';
-  $('authAlert').className = 'notice';
+  const isLogin=t.dataset.tab==='login';
+  $('loginForm').style.display=isLogin?'flex':'none';
+  $('registerForm').style.display=isLogin?'none':'flex';
+  $('authAlert').className='notice';
 }));
 
-$('loginBtn').addEventListener('click', doLogin);
-$('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
-$('regBtn').addEventListener('click', doRegister);
-$('regPass2').addEventListener('keydown', e => { if (e.key === 'Enter') doRegister(); });
-$('logoutBtn').addEventListener('click', doLogout);
+$('loginBtn').addEventListener('click',doLogin);
+$('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+$('regBtn').addEventListener('click',doRegister);
+$('regPass2').addEventListener('keydown',e=>{if(e.key==='Enter')doRegister();});
+$('logoutBtn').addEventListener('click',doLogout);
+$('balanceChip').addEventListener('click',openBalanceModal);
+$('inboxBtn').addEventListener('click',openInbox);
 
-async function doLogin() {
-  const u = $('loginUser').value.trim();
-  const p = $('loginPass').value;
-  if (!u || !p) {
-    showNotice($('authAlert'), 'error', 'Foydalanuvchi nomi va parolni kiriting.');
-    return;
-  }
-  $('loginBtn').disabled = true;
-  $('loginBtn').textContent = '⏳...';
-  try {
-    const { ok, data } = await api('/api/login', {
-      method: 'POST',
-      body: JSON.stringify({ username: u, password: p })
-    });
-    if (!ok || !data.ok) throw new Error(data.error || 'Kirish amalga oshmadi.');
-    token = data.token;
-    localStorage.setItem('bb_token', token);
-    setUser(data.username, data.is_admin);
-    showDash();
-  } catch (e) {
-    showNotice($('authAlert'), 'error', '❌ ' + (e.message || 'Xatolik.'));
-  } finally {
-    $('loginBtn').disabled = false;
-    $('loginBtn').textContent = 'Kirish';
-  }
+async function doLogin(){
+  const u=$('loginUser').value.trim(),p=$('loginPass').value;
+  if(!u||!p){showNotice($('authAlert'),'error','Foydalanuvchi nomi va parolni kiriting.');return;}
+  $('loginBtn').disabled=true;$('loginBtn').textContent='⏳...';
+  try{
+    const {ok,data}=await api('/api/login',{method:'POST',body:JSON.stringify({username:u,password:p})});
+    if(!ok||!data.ok)throw new Error(data.error||'Kirish amalga oshmadi.');
+    token=data.token;localStorage.setItem('bb_token',token);
+    setUser(data.username,data.is_admin);showDash();
+  }catch(e){showNotice($('authAlert'),'error','❌ '+(e.message||'Xatolik.'));}
+  finally{$('loginBtn').disabled=false;$('loginBtn').textContent='Kirish';}
 }
 
-async function doRegister() {
-  const u = $('regUser').value.trim();
-  const p = $('regPass').value;
-  const p2 = $('regPass2').value;
-  if (!u || !p) {
-    showNotice($('authAlert'), 'error', "Barcha maydonlarni to'ldiring.");
-    return;
-  }
-  if (p !== p2) {
-    showNotice($('authAlert'), 'error', 'Parollar mos kelmadi.');
-    return;
-  }
-  if (p.length < 6) {
-    showNotice($('authAlert'), 'error', "Parol kamida 6 ta belgi bo'lishi kerak.");
-    return;
-  }
-  $('regBtn').disabled = true;
-  $('regBtn').textContent = '⏳...';
-  try {
-    const { ok, data } = await api('/api/register', {
-      method: 'POST',
-      body: JSON.stringify({ username: u, password: p })
-    });
-    if (!ok || !data.ok) throw new Error(data.error || "Ro'yxatdan o'tish amalga oshmadi.");
-    token = data.token;
-    localStorage.setItem('bb_token', token);
-    setUser(data.username, data.is_admin);
-    let msg = `🎉 Xush kelibsiz, ${data.username}!`;
-    if (data.is_first) {
-      msg = `🎉 Siz platformaning birinchi foydalanuvchisiz — ADMINISTRATOR bo'ldingiz!`;
-    }
-    showNotice($('authAlert'), 'success', msg);
-    setTimeout(showDash, 900);
-  } catch (e) {
-    showNotice($('authAlert'), 'error', '❌ ' + (e.message || 'Xatolik.'));
-  } finally {
-    $('regBtn').disabled = false;
-    $('regBtn').textContent = "Ro'yxatdan o'tish";
-  }
+async function doRegister(){
+  const u=$('regUser').value.trim(),p=$('regPass').value,p2=$('regPass2').value;
+  if(!u||!p){showNotice($('authAlert'),'error','Barcha maydonlarni to’ldiring.');return;}
+  if(p!==p2){showNotice($('authAlert'),'error','Parollar mos kelmadi.');return;}
+  if(p.length<6){showNotice($('authAlert'),'error','Parol kamida 6 ta belgi bo’lishi kerak.');return;}
+  $('regBtn').disabled=true;$('regBtn').textContent='⏳...';
+  try{
+    const {ok,data}=await api('/api/register',{method:'POST',body:JSON.stringify({username:u,password:p})});
+    if(!ok||!data.ok)throw new Error(data.error||'Ro’yxatdan o’tish amalga oshmadi.');
+    token=data.token;localStorage.setItem('bb_token',token);
+    setUser(data.username,data.is_admin);
+    showNotice($('authAlert'),'success',`🎉 Xush kelibsiz, ${data.username}! O’z botlaringizni yarating.`);
+    setTimeout(showDash,800);
+  }catch(e){showNotice($('authAlert'),'error','❌ '+(e.message||'Xatolik.'));}
+  finally{$('regBtn').disabled=false;$('regBtn').textContent='Ro’yxatdan o’tish';}
 }
 
-async function doLogout() {
-  try { await api('/api/logout', { method: 'POST' }); } catch (e) {}
-  token = null;
-  localStorage.removeItem('bb_token');
-  $('loginUser').value = '';
-  $('loginPass').value = '';
-  $('regUser').value = '';
-  $('regPass').value = '';
-  $('regPass2').value = '';
+async function doLogout(){
+  try{await api('/api/logout',{method:'POST'});}catch(e){}
+  token=null;localStorage.removeItem('bb_token');
+  $('loginUser').value='';$('loginPass').value='';$('regUser').value='';$('regPass').value='';$('regPass2').value='';
   showAuth();
 }
 
-function setUser(username, isAdmin) {
-  $('userLabel').textContent = username;
-  $('adminBadge').style.display = isAdmin ? 'inline-block' : 'none';
-  $('adminSection').style.display = isAdmin ? 'block' : 'none';
+function setUser(username,isAdmin,balance){
+  $('userLabel').textContent=username;
+  $('adminBadge').style.display=isAdmin?'inline-block':'none';
+  if(typeof balance==='number')updateBalanceUI(balance);
 }
 
-async function checkSession() {
-  if (!token) {
-    showAuth();
-    return;
-  }
-  try {
-    const { ok, data } = await api('/api/me');
-    if (ok) {
-      setUser(data.username, data.is_admin);
-      showDash();
-    } else {
-      token = null;
-      localStorage.removeItem('bb_token');
-      showAuth();
-    }
-  } catch (e) {
-    showAuth();
-  }
+function updateBalanceUI(b){
+  myBalance=b;
+  $('balanceLabel').textContent=fmtPrice(b);
+  $('balanceChip').style.display = ($('adminBadge').style.display==='inline-block') ? 'none' : 'flex';
+}
+
+async function loadMyBalance(){
+  try{
+    const {ok,data}=await api('/api/me');
+    if(ok)updateBalanceUI(data.balance);
+  }catch(e){}
+}
+
+async function loadPricing(){
+  try{
+    const r=await fetch('/api/pricing');if(!r.ok)return;
+    pricingInfo=await r.json();
+    $('pricingPrice').textContent=fmtSum(pricingInfo.bot_price);
+    $('pricingTrial').textContent=pricingInfo.bot_trial_days+' kun';
+    $('pricingPaid').textContent=pricingInfo.paid_bot_days+' kun';
+  }catch(e){}
+}
+
+async function checkSession(){
+  if(!token){showAuth();return;}
+  try{
+    const {ok,data}=await api('/api/me');
+    if(ok){setUser(data.username,data.is_admin,data.balance);showDash();}
+    else{token=null;localStorage.removeItem('bb_token');showAuth();}
+  }catch(e){showAuth();}
 }
 
 /* ── Bot yaratish ── */
-document.querySelectorAll('.template').forEach(card => card.addEventListener('click', () => {
-  document.querySelectorAll('.template').forEach(x => x.classList.remove('active'));
-  card.classList.add('active');
-  selectedTemplate = card.dataset.template;
+document.querySelectorAll('.template').forEach(card=>card.addEventListener('click',()=>{
+  document.querySelectorAll('.template').forEach(x=>x.classList.remove('active'));
+  card.classList.add('active');selectedTemplate=card.dataset.template;
 }));
-
-$('toggleToken').addEventListener('click', () => {
-  const el = $('botToken');
-  el.type = el.type === 'password' ? 'text' : 'password';
-  $('toggleToken').textContent = el.type === 'password' ? "Ko'rsatish" : 'Yashirish';
+$('toggleToken').addEventListener('click',()=>{
+  const el=$('botToken');el.type=el.type==='password'?'text':'password';
+  $('toggleToken').textContent=el.type==='password'?'Ko’rsatish':'Yashirish';
 });
+$('launchBtn').addEventListener('click',launchBot);
+$('botToken').addEventListener('keydown',e=>{if(e.key==='Enter')launchBot();});
 
-$('launchBtn').addEventListener('click', launchBot);
-$('botToken').addEventListener('keydown', e => { if (e.key === 'Enter') launchBot(); });
-
-async function launchBot() {
-  const btn = $('launchBtn');
-  const tok = $('botToken').value.trim();
-  if (!/^\d+:[A-Za-z0-9_-]{20,}$/.test(tok)) {
-    showNotice($('alertBox'), 'error', "Token formati noto'g'ri. @BotFather bergan tokenni tekshiring.");
-    return;
-  }
-  btn.disabled = true;
-  btn.textContent = '⏳ Tekshirilmoqda...';
-  try {
-    const { ok, data } = await api('/api/create-bot', {
-      method: 'POST',
-      body: JSON.stringify({ bot_token: tok, template: selectedTemplate })
-    });
-    if (!ok || !data.ok) throw new Error(data.error || 'Bot yaratilmadi.');
-    showNotice($('alertBox'), 'success',
-      `🎉 @${data.username} muvaffaqiyatli ulandi! 3 kunlik sinov boshlandi. Telegramda /start yuboring.`
-    );
-    $('botToken').value = '';
-    await loadMyBots();
-  } catch (e) {
-    showNotice($('alertBox'), 'error', '❌ ' + (e.message || 'Server bilan ulanishda xatolik.'));
-  } finally {
-    btn.disabled = false;
-    btn.textContent = '🚀 Botni ishga tushirish';
-  }
+async function launchBot(){
+  const btn=$('launchBtn'),tok=$('botToken').value.trim();
+  if(!/^\d+:[A-Za-z0-9_-]{20,}$/.test(tok)){showNotice($('alertBox'),'error','Token formati noto’g’ri. @BotFather bergan tokenni tekshiring.');return;}
+  btn.disabled=true;btn.textContent='⏳ Tekshirilmoqda...';
+  try{
+    const {ok,data}=await api('/api/create-bot',{method:'POST',body:JSON.stringify({bot_token:tok,template:selectedTemplate})});
+    if(!ok||!data.ok)throw new Error(data.error||'Bot yaratilmadi.');
+    const charged=data.charged||0;
+    const note = charged>0
+      ? `🎉 @${data.username} ulandi! ${fmtPrice(charged)} yechildi. Qolgan balans: ${fmtPrice(data.balance_after)}. Bot ${data.valid_days} kun amal qiladi.`
+      : `🎉 @${data.username} muvaffaqiyatli ulandi! ${data.pricing_note||'Bepul sinov'} (${data.valid_days} kun). Telegramda /start yuboring.`;
+    showNotice($('alertBox'),'success',note);
+    $('botToken').value='';await loadMyBots();await loadMyBalance();await loadStats();
+  }catch(e){showNotice($('alertBox'),'error','❌ '+(e.message||'Server bilan ulanishda xatolik.'));}
+  finally{btn.disabled=false;btn.textContent='🚀 Botni ishga tushirish';}
 }
 
-/* ── Botlar ro'yxati ── */
-function esc(s) {
-  return String(s).replace(/[&<>"']/g, c => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-  }[c]));
-}
+/* ── Botlar ro’yxati ── */
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+const TPL_LABEL={support:'Yordam markazi',shop:"Onlayn do’kon",quiz:'Quiz / Test',sub:'Obuna boti'};
+const TPL_ICO={support:'💬',shop:'🛍️',quiz:'🧠',sub:'🔐'};
 
-const TPL_LABEL = {
-  support: 'Yordam markazi',
-  shop: "Onlayn do'kon",
-  quiz: 'Quiz / Test',
-  sub: 'Obuna boti'
-};
-const TPL_ICO = {
-  support: '💬',
-  shop: '🛍️',
-  quiz: '🧠',
-  sub: '🔐'
-};
-
-function botRowHtml(b, showOwner) {
-  const active = b.is_active;
-  const ownerPart = (showOwner && b.owner) ? ` · Egasi: ${esc(b.owner)}` : '';
+function botRowHtml(b,showOwner){
+  const active=b.is_active;
+  const paidBadge=b.is_paid?'<span class="paid-badge paid">Pullik</span>':'<span class="paid-badge free">Bepul</span>';
   return `<article class="bot-row">
     <div class="bot-id">
-      <div class="bot-avatar">${TPL_ICO[b.template] || '🤖'}</div>
+      <div class="bot-avatar">${TPL_ICO[b.template]||'🤖'}</div>
       <div class="bot-meta">
-        <b>@${esc(b.username)}</b>
-        <small>${esc(TPL_LABEL[b.template] || b.template)} · Sinov tugashi: ${esc(b.trial_ends_at)}${ownerPart}</small>
+        <b>@${esc(b.username)}</b>${paidBadge}
+        <small>${esc(TPL_LABEL[b.template]||b.template)} · Muddati: ${esc(b.trial_ends_at)}${showOwner&&b.owner?` · Egasi: ${esc(b.owner)}`:''}</small>
       </div>
     </div>
     <div class="bot-actions">
-      <span class="status ${active ? 'active' : 'expired'}">${active ? '● Faol' : '● Tugagan'}</span>
-      <button class="btn-manage" onclick="manageBot(${b.id}, '${b.template}')">Boshqarish</button>
-      <button class="btn-danger" onclick="deleteBot(${b.id}, '@${esc(b.username)}')">O'chirish</button>
+      <span class="status ${active?'active':'expired'}">${active?'● Faol':'● Tugagan'}</span>
+      <button class="btn-manage" onclick="manageBot(${b.id},'${b.template}')">Boshqarish</button>
+      <button class="btn-danger" onclick="deleteBot(${b.id},'@${esc(b.username)}')">O’chirish</button>
     </div>
   </article>`;
 }
 
-function renderMy() {
-  const q = $('botSearch').value.toLowerCase();
-  const filtered = myBots.filter(b =>
-    ('@' + b.username).toLowerCase().includes(q) ||
-    (TPL_LABEL[b.template] || '').toLowerCase().includes(q)
-  );
-  const active = myBots.filter(b => b.is_active).length;
-  $('myBotsCount').textContent = myBots.length;
-  $('myActiveCount').textContent = active;
-
-  if (!filtered.length) {
-    $('botsContainer').innerHTML = `<div class="empty">${
-      myBots.length
-        ? "Qidiruv bo'yicha bot topilmadi."
-        : "Hozircha botingiz yo'q. Yuqorida birinchi botingizni yarating ✨"
-    }</div>`;
-    return;
-  }
-  $('botsContainer').innerHTML = filtered.map(b => botRowHtml(b, false)).join('');
+function renderMy(){
+  const q=$('botSearch').value.toLowerCase();
+  const filtered=myBots.filter(b=>('@'+b.username).toLowerCase().includes(q)||(TPL_LABEL[b.template]||'').toLowerCase().includes(q));
+  const active=myBots.filter(b=>b.is_active).length;
+  $('myBotsCount').textContent=myBots.length;
+  $('myActiveCount').textContent=active;
+  if(!filtered.length){$('botsContainer').innerHTML=`<div class="empty">${myBots.length?'Qidiruv bo’yicha bot topilmadi.':'Hozircha botingiz yo’q. Yuqorida birinchi botingizni yarating ✨'}</div>`;return;}
+  $('botsContainer').innerHTML=filtered.map(b=>botRowHtml(b,false)).join('');
 }
 
-function renderAdmin() {
-  const q = $('adminSearch').value.toLowerCase();
-  const filtered = adminBots.filter(b =>
-    ('@' + b.username).toLowerCase().includes(q) ||
-    (b.owner || '').toLowerCase().includes(q) ||
-    (TPL_LABEL[b.template] || '').toLowerCase().includes(q)
-  );
-  if (!filtered.length) {
-    $('adminContainer').innerHTML = '<div class="empty">Botlar yo\'q.</div>';
-    return;
-  }
-  $('adminContainer').innerHTML = filtered.map(b => botRowHtml(b, true)).join('');
+function renderAdminBots(){
+  const q=$('adminBotSearch').value.toLowerCase();
+  const filtered=adminBots.filter(b=>('@'+b.username).toLowerCase().includes(q)||(b.owner||'').toLowerCase().includes(q)||(TPL_LABEL[b.template]||'').toLowerCase().includes(q));
+  if(!filtered.length){$('adminBotsContainer').innerHTML=`<div class="empty">Botlar yo’q.</div>`;return;}
+  $('adminBotsContainer').innerHTML=filtered.map(b=>botRowHtml(b,true)).join('');
 }
 
-$('botSearch').addEventListener('input', renderMy);
-$('adminSearch').addEventListener('input', renderAdmin);
+$('botSearch').addEventListener('input',renderMy);
 
-async function loadMyBots() {
-  try {
-    const { ok, data } = await api('/api/my-bots');
-    if (ok) {
-      myBots = data;
-      renderMy();
-    }
-  } catch (e) {
-    $('botsContainer').innerHTML = '<div class="empty">Botlarni yuklab bo\'lmadi.</div>';
-  }
+async function loadMyBots(){
+  try{
+    const {ok,data}=await api('/api/my-bots');
+    if(ok){myBots=data;renderMy();}
+  }catch(e){$('botsContainer').innerHTML='<div class="empty">Botlarni yuklab bo’lmadi.</div>';}
 }
 
-async function loadAdminBots() {
-  try {
-    const { ok, data } = await api('/api/admin/bots');
-    if (ok) {
-      adminBots = data;
-      renderAdmin();
-    }
-  } catch (e) {
-    $('adminContainer').innerHTML = '<div class="empty">Yuklab bo\'lmadi.</div>';
-  }
+async function loadStats(){
+  try{
+    const r=await fetch('/api/stats');if(!r.ok)throw 0;
+    const d=await r.json();$('totalBots').textContent=d.total_bots;
+  }catch(e){$('totalBots').textContent='—';}
 }
 
-async function loadStats() {
-  try {
-    const r = await fetch('/api/stats');
-    if (!r.ok) throw 0;
-    const d = await r.json();
-    $('totalBots').textContent = d.total_bots;
-  } catch (e) {
-    $('totalBots').textContent = '—';
-  }
+/* ── Admin panel: tablar va yuklash ── */
+document.querySelectorAll('.admin-tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.admin-tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.admin-pane').forEach(p=>p.classList.remove('active'));
+  t.classList.add('active');
+  adminTab=t.dataset.pane;
+  const pane=$('pane-'+adminTab);pane.classList.add('active');
+  switchAdminTab(adminTab);
+}));
+
+$('adminRefresh').addEventListener('click',()=>{switchAdminTab(adminTab);});
+
+function switchAdminTab(tab){
+  if(tab==='stats')return loadAdminStats();
+  if(tab==='users')return loadAdminUsers();
+  if(tab==='bots')return loadAdminBots();
+  if(tab==='orders')return loadAdminOrders();
+  if(tab==='tickets')return loadAdminTickets();
+  if(tab==='results')return loadAdminResults();
+  if(tab==='topups')return loadAdminTopups();
+  if(tab==='settings')return loadAdminSettings();
+  if(tab==='broadcasts')return loadBroadcasts();
+  if(tab==='chats')return loadAdminChats();
 }
 
-async function loadAll() {
+async function loadAdminBots(){
+  try{
+    const {ok,data}=await api('/api/admin/bots');
+    if(ok){adminBots=data;renderAdminBots();}
+  }catch(e){$('adminBotsContainer').innerHTML='<div class="empty">Yuklab bo\'lmadi.</div>';}
+}
+
+$('adminBotSearch').addEventListener('input',renderAdminBots);
+$('adminUserSearch').addEventListener('input',renderAdminUsers);
+$('adminOrderSearch').addEventListener('input',renderAdminOrders);
+$('adminTicketSearch').addEventListener('input',renderAdminTickets);
+$('adminResultSearch').addEventListener('input',renderAdminResults);
+
+async function loadAdminStats(){
+  try{
+    const {ok,data}=await api('/api/admin/stats');
+    if(!ok)throw 0;
+    adminStats=data;renderAdminStats();
+  }catch(e){$('adminStatsGrid').innerHTML='<div class="empty">Statistikani yuklab bo\'lmadi.</div>';}
+}
+
+function renderAdminStats(){
+  const s=adminStats;if(!s)return;
+  const cards=[
+    {ico:'👥',label:'Foydalanuvchilar',val:s.users.total,sub:`${s.users.admins} admin · ${s.users.blocked} bloklangan`},
+    {ico:'🤖',label:'Jami botlar',val:s.bots.total,sub:`${s.bots.active} faol`},
+    {ico:'⚡',label:'Ishlayotgan botlar',val:s.running_bots,sub:'polling rejimida'},
+    {ico:'💰',label:'Balansdagi mablag\'',val:fmtSum(s.finance?s.finance.total_balance:0),sub:'foydalanuvchilar summasi'},
+    {ico:'⏳',label:'Kutilayotgan to\'lovlar',val:s.finance?s.finance.pending_topups_count:0,sub:s.finance?fmtSum(s.finance.pending_topups_amount)+' so\'m':'-'},
+    {ico:'✅',label:'Tasdiqlangan to\'lovlar',val:fmtSum(s.finance?s.finance.approved_total:0),sub:'jami so\'m'},
+    {ico:'💸',label:'Bot xaridlari',val:fmtSum(s.finance?s.finance.spent_total:0),sub:'sarflangan so\'m'},
+    {ico:'📦',label:'Buyurtmalar',val:s.orders.total,sub:`Daromad: ${fmtPrice(s.orders.revenue)}`},
+    {ico:'🎫',label:'Ticketlar',val:s.tickets.total,sub:`${s.tickets.open} ochiq`},
+    {ico:'🏆',label:'Quiz natijalari',val:s.quiz.total,sub:`O’rtacha: ${s.quiz.avg_score_pct}%`},
+  ];
+  $('adminStatsGrid').innerHTML=cards.map(c=>`<div class="astat"><small>${c.ico} ${c.label}</small><strong>${c.val}</strong><div class="sub">${c.sub}</div></div>`).join('');
+  const max=Math.max(1,...VALID_TEMPLATES_ARR.map(t=>s.bots.by_template[t]||0));
+  $('tplBars').innerHTML=VALID_TEMPLATES_ARR.map(t=>{
+    const n=s.bots.by_template[t]||0;
+    return `<div class="tpl-bar"><span class="label">${TPL_ICO[t]} ${TPL_LABEL[t]}</span><div class="bar-track"><div class="bar-fill" style="width:${(n/max*100).toFixed(0)}%"></div></div><span class="num">${n}</span></div>`;
+  }).join('');
+  // Pending to’lovlar badge’ini yangilaymiz.
+  const pb=$('pendingBadge');
+  const pc=s.finance?s.finance.pending_topups_count:0;
+  if(pc>0){pb.textContent=pc;pb.style.display='grid';}else{pb.style.display='none';}
+}
+
+async function loadAdminUsers(){
+  try{
+    const {ok,data}=await api('/api/admin/users');
+    if(!ok)throw 0;
+    adminUsers=data;renderAdminUsers();
+  }catch(e){$('usersContainer').innerHTML='<div class="empty">Yuklab bo\'lmadi.</div>';}
+}
+
+function renderAdminUsers(){
+  const q=$('adminUserSearch').value.toLowerCase();
+  const filtered=adminUsers.filter(u=>u.username.toLowerCase().includes(q));
+  if(!filtered.length){$('usersContainer').innerHTML=`<div class="empty">${adminUsers.length?'Topilmadi.':'Foydalanuvchilar yo\'q.'}</div>`;return;}
+  const me=$('userLabel').textContent;
+  $('usersContainer').innerHTML=`<table class="users-table"><thead><tr><th>Foydalanuvchi</th><th>Holat</th><th>Balans</th><th>Botlar</th><th>Ro’yxatga</th><th>Amallar</th></tr></thead><tbody>`+
+    filtered.map(u=>{
+      const badges=[];
+      if(u.is_site_admin)badges.push('<span class="badge site-admin">SAYT ADMINI</span>');
+      else if(u.is_admin)badges.push('<span class="badge admin">ADMIN</span>');
+      if(u.is_blocked)badges.push('<span class="badge blocked">BLOK</span>');
+      const canAct=!u.is_site_admin && u.username!==me;
+      const blockBtn=canAct?`<button class="btn-sm ${u.is_blocked?'warn':'danger'}" onclick="toggleBlock(${u.id})">${u.is_blocked?'Blokdan chiqarish':'Bloklash'}</button>`:'';
+      const delBtn=canAct?`<button class="btn-sm danger" onclick="deleteUser(${u.id},'${esc(u.username)}')">O’chirish</button>`:'';
+      const chatBtn=!u.is_site_admin?`<button class="btn-sm" onclick="openAdminChat(${u.id},'${esc(u.username)}')" title="Suhbat">💬</button>`:'';
+      const pend=u.pending_topups>0?` <span class="status-tag pending" title="${u.pending_topups} kutilayotgan to’lov">${u.pending_topups}</span>`:'';
+      return `<tr><td><b>${esc(u.username)}</b></td><td>${badges.join(' ')||'<span class="muted">faol</span>'}</td><td><b style="color:#ffd49a">${fmtSum(u.balance)}</b> so’m${pend}</td><td>${u.bots_count}</td><td class="muted">${esc(u.created_at)}</td><td style="white-space:nowrap">${chatBtn} ${blockBtn} ${delBtn}</td></tr>`;
+    }).join('')+'</tbody></table>';
+}
+
+window.toggleBlock=async function(uid){
+  try{
+    const {ok,data}=await api(`/api/admin/users/${uid}/block`,{method:'POST'});
+    if(!ok)throw new Error(data.detail||'Amalga oshmadi.');
+    await loadAdminUsers();
+  }catch(e){alert('Xatolik: '+(e.message||'Amalga oshmadi.'));}
+};
+
+window.deleteUser=async function(uid,name){
+  if(!confirm(`${name} foydalanuvchisini o’chirmoqchimisiz? Uning barcha botlari ham o’chiriladi.`))return;
+  try{
+    const {ok,data}=await api(`/api/admin/users/${uid}`,{method:'DELETE'});
+    if(!ok)throw new Error(data.detail||'O\'chirilmadi.');
+    await loadAdminUsers();
+  }catch(e){alert('Xatolik: '+(e.message||'O\'chirilmadi.'));}
+};
+
+async function loadAdminOrders(){
+  try{
+    const {ok,data}=await api('/api/admin/orders');
+    if(!ok)throw 0;
+    adminOrders=data;renderAdminOrders();
+  }catch(e){$('adminOrdersContainer').innerHTML='<div class="empty">Yuklab bo\'lmadi.</div>';}
+}
+
+function renderAdminOrders(){
+  const q=$('adminOrderSearch').value.toLowerCase();
+  const filtered=adminOrders.filter(o=>('@'+o.bot_username).toLowerCase().includes(q)||(o.customer_name||'').toLowerCase().includes(q)||(o.customer_phone||'').toLowerCase().includes(q));
+  if(!filtered.length){$('adminOrdersContainer').innerHTML=`<div class="empty">${adminOrders.length?'Topilmadi.':'Buyurtmalar yo\'q.'}</div>`;return;}
+  $('adminOrdersContainer').innerHTML=`<table class="orders-table"><thead><tr><th>№</th><th>Bot</th><th>Mijoz</th><th>Tel</th><th>Mahsulotlar</th><th>Jami</th><th>Holat</th><th>Amal</th></tr></thead><tbody>`+
+    filtered.map(o=>`<tr>
+      <td>${o.id}</td><td>@${esc(o.bot_username)}</td>
+      <td>${esc(o.customer_name||'-')}<br><span class="muted">${esc(o.tg_username||'')}</span></td>
+      <td>${esc(o.customer_phone||'-')}</td>
+      <td>${(o.items||[]).map(i=>`${esc(i.name)} ×${i.qty}`).join(', ')||'-'}</td>
+      <td><b>${fmtPrice(o.total)}</b></td>
+      <td><span class="status ${o.status==='new'?'active':'expired'}">${esc(o.status)}</span></td>
+      <td><button class="btn-sm" onclick="setOrderStatus(${o.id},'done')">Tugatish</button></td>
+    </tr>`).join('')+'</tbody></table>';
+}
+
+window.setOrderStatus=async function(oid,st){
+  try{
+    const {ok,data}=await api(`/api/admin/orders/${oid}/status?status_value=${st}`,{method:'POST'});
+    if(!ok)throw new Error(data.detail||'Amalga oshmadi.');
+    await loadAdminOrders();
+  }catch(e){alert('Xatolik: '+(e.message||'Amalga oshmadi.'));}
+};
+
+async function loadAdminTickets(){
+  try{
+    const {ok,data}=await api('/api/admin/tickets');
+    if(!ok)throw 0;
+    adminTickets=data;renderAdminTickets();
+  }catch(e){$('adminTicketsContainer').innerHTML='<div class="empty">Yuklab bo\'lmadi.</div>';}
+}
+
+function renderAdminTickets(){
+  const q=$('adminTicketSearch').value.toLowerCase();
+  const filtered=adminTickets.filter(t=>('@'+t.bot_username).toLowerCase().includes(q)||(t.tg_username||'').toLowerCase().includes(q));
+  if(!filtered.length){$('adminTicketsContainer').innerHTML=`<div class="empty">${adminTickets.length?'Topilmadi.':'Ticketlar yo\'q.'}</div>`;return;}
+  $('adminTicketsContainer').innerHTML='<div class="data-list">'+filtered.map(t=>`
+    <div class="data-item">
+      <div class="row"><b>Ticket №${t.ticket_no}</b> <span class="muted">@${esc(t.bot_username)}</span>
+        <span><span class="status ${t.status==='open'?'active':'expired'}">${esc(t.status)}</span>
+        <button class="btn-sm ${t.status==='open'?'warn':''}" onclick="toggleTicketStatus(${t.id})">${t.status==='open'?'Yopish':'Qayta ochish'}</button></span>
+      </div>
+      <div class="muted" style="margin-top:5px">👤 ${esc(t.tg_username||'-')} · ${esc((t.created_at||'').slice(0,16).replace('T',' '))}</div>
+      <div style="margin-top:5px">${esc(t.message)}</div>
+    </div>`).join('')+'</div>';
+}
+
+window.toggleTicketStatus=async function(tid){
+  try{
+    const {ok,data}=await api(`/api/admin/tickets/${tid}/status`,{method:'POST'});
+    if(!ok)throw new Error(data.detail||'Amalga oshmadi.');
+    await loadAdminTickets();
+  }catch(e){alert('Xatolik: '+(e.message||'Amalga oshmadi.'));}
+};
+
+async function loadAdminResults(){
+  try{
+    const {ok,data}=await api('/api/admin/results');
+    if(!ok)throw 0;
+    adminResults=data;renderAdminResults();
+  }catch(e){$('adminResultsContainer').innerHTML='<div class="empty">Yuklab bo\'lmadi.</div>';}
+}
+
+function renderAdminResults(){
+  const q=$('adminResultSearch').value.toLowerCase();
+  const filtered=adminResults.filter(r=>('@'+r.bot_username).toLowerCase().includes(q)||(r.tg_username||'').toLowerCase().includes(q));
+  if(!filtered.length){$('adminResultsContainer').innerHTML=`<div class="empty">${adminResults.length?'Topilmadi.':'Natijalar yo\'q.'}</div>`;return;}
+  $('adminResultsContainer').innerHTML=`<table class="results-table"><thead><tr><th>Bot</th><th>Foydalanuvchi</th><th>Ball</th><th>Foiz</th><th>Sana</th></tr></thead><tbody>`+
+    filtered.map(r=>{
+      const pct=r.total?Math.round(r.score/r.total*100):0;
+      const cls=pct>=80?'active':(pct>=50?'active':'expired');
+      return `<tr><td>@${esc(r.bot_username)}</td><td>${esc(r.tg_username||'-')}</td><td><b>${r.score}/${r.total}</b></td><td><span class="status ${cls}">${pct}%</span></td><td class="muted">${esc((r.created_at||'').slice(0,16).replace('T',' '))}</td></tr>`;
+    }).join('')+'</tbody></table>';
+}
+
+const VALID_TEMPLATES_ARR=['support','shop','quiz','sub'];
+
+async function loadAdminAll(){
+  // Admin panel barcha ma’lumotlarini parallel yuklaydi.
   await Promise.all([
-    loadMyBots(),
-    loadStats(),
-    loadAdminBots().catch(() => {})
+    loadAdminStats().catch(()=>{}),
+    loadAdminUsers().catch(()=>{}),
+    loadAdminBots().catch(()=>{}),
+    loadAdminOrders().catch(()=>{}),
+    loadAdminTickets().catch(()=>{}),
+    loadAdminResults().catch(()=>{}),
   ]);
 }
 
-/* ── O'chirish ── */
-async function deleteBot(id, name) {
-  if (!confirm(`${name} botini o'chirmoqchimisiz? Bu amalni qaytarib bo'lmaydi.`)) return;
-  try {
-    const { ok, data } = await api(`/api/bots/${id}`, { method: 'DELETE' });
-    if (!ok) throw new Error(data.detail || "O'chirilmadi.");
-    await loadMyBots();
-    if ($('adminBadge').style.display !== 'none') await loadAdminBots();
-  } catch (e) {
-    alert('Xatolik: ' + (e.message || "O'chirilmadi."));
+async function loadAll(){
+  await Promise.all([loadMyBots(),loadStats(),loadMyBalance(),loadPricing(),updateInboxBadge()]);
+  if($('adminBadge').style.display!=='none'){
+    $('adminSection').style.display='block';
+    await switchAdminTab(adminTab);
+    // Badge’larni yangilash (faqat faol tab bo’lmasa — dublikat oldini olamiz).
+    if(adminTab!=='stats')await loadAdminStats().catch(()=>{});
+    if(adminTab!=='chats')await loadAdminChats().catch(()=>{});
   }
 }
 
+/* ── O’chirish ── */
+async function deleteBot(id,name){
+  if(!confirm(`${name} botini o’chirmoqchimisiz? Bu amalni qaytarib bo’lmaydi.`))return;
+  try{
+    const {ok,data}=await api(`/api/bots/${id}`,{method:'DELETE'});
+    if(!ok)throw new Error(data.detail||'O\'chirilmadi.');
+    await loadMyBots();
+    if($('adminBadge').style.display!=='none'){await loadAdminBots();if(adminTab==='stats')await loadAdminStats();}
+  }catch(e){alert('Xatolik: '+(e.message||'O\'chirilmadi.'));}
+}
+
 /* ── Bot boshqaruvi (modal) ── */
-$('modalClose').addEventListener('click', closeModal);
-$('modalOverlay').addEventListener('click', e => {
-  if (e.target === $('modalOverlay')) closeModal();
-});
+$('modalClose').addEventListener('click',closeModal);
+$('modalOverlay').addEventListener('click',e=>{if(e.target===$('modalOverlay'))closeModal();});
 
-function closeModal() {
-  $('modalOverlay').classList.remove('show');
-  currentBot = null;
-}
-function openModal(title) {
-  $('modalTitle').textContent = title;
-  $('modalBody').innerHTML = '<div class="empty">Yuklanmoqda...</div>';
-  $('modalOverlay').classList.add('show');
-}
+function closeModal(){$('modalOverlay').classList.remove('show');currentBot=null;}
+function openModal(title){$('modalTitle').textContent=title;$('modalBody').innerHTML='<div class="empty">Yuklanmoqda...</div>';$('modalOverlay').classList.add('show');}
 
-window.manageBot = async function (id, template) {
-  currentBot = { id, template };
-  const label = TPL_LABEL[template] || template;
+window.manageBot=async function(id,template){
+  currentBot={id,template};
+  const label=TPL_LABEL[template]||template;
   openModal(`@${label} — boshqarish`);
-  if (template === 'shop') return loadShopData(id);
-  if (template === 'support') return loadTickets(id);
-  if (template === 'quiz') return loadResults(id);
-  $('modalBody').innerHTML = '<div class="empty">Bu shablon uchun alohida boshqaruv paneli yo\'q. Bot Telegramda to\'liq ishlaydi.</div>';
+  if(template==='shop')return loadShopData(id);
+  if(template==='support')return loadTickets(id);
+  if(template==='quiz')return loadResults(id);
+  $('modalBody').innerHTML=`<div class="empty">Bu shablon uchun alohida boshqaruv paneli yo’q. Bot Telegramda to’liq ishlaydi.</div>`;
 };
 
-async function loadShopData(id) {
-  $('modalBody').innerHTML = `
-    <div class="modal-tabs">
-      <button class="modal-tab active" id="tabProd">📦 Mahsulotlar</button>
-      <button class="modal-tab" id="tabOrders">🧾 Buyurtmalar</button>
-    </div>
-    <div id="prodPanel"></div>
-    <div id="ordersPanel" style="display:none"></div>`;
-  
-  $('tabProd').addEventListener('click', () => {
-    $('tabProd').classList.add('active');
-    $('tabOrders').classList.remove('active');
-    $('prodPanel').style.display = 'block';
-    $('ordersPanel').style.display = 'none';
-  });
-  $('tabOrders').addEventListener('click', () => {
-    $('tabOrders').classList.add('active');
-    $('tabProd').classList.remove('active');
-    $('prodPanel').style.display = 'none';
-    $('ordersPanel').style.display = 'block';
-    loadOrders(id);
-  });
-  
+async function loadShopData(id){
+  $('modalBody').innerHTML=`
+    <div class="modal-tabs"><button class="modal-tab active" id="tabProd">📦 Mahsulotlar</button><button class="modal-tab" id="tabOrders">🧾 Buyurtmalar</button></div>
+    <div id="prodPanel"></div><div id="ordersPanel" style="display:none"></div>`;
+  $('tabProd').addEventListener('click',()=>{$('tabProd').classList.add('active');$('tabOrders').classList.remove('active');$('prodPanel').style.display='block';$('ordersPanel').style.display='none';});
+  $('tabOrders').addEventListener('click',()=>{$('tabOrders').classList.add('active');$('tabProd').classList.remove('active');$('prodPanel').style.display='none';$('ordersPanel').style.display='block';loadOrders(id);});
   renderProductForm(id);
   await loadProducts(id);
 }
 
-function renderProductForm(id) {
-  $('prodPanel').innerHTML = `
+function renderProductForm(id){
+  $('prodPanel').innerHTML=`
     <div class="add-product-form">
       <input class="form-input" id="pName" placeholder="Mahsulot nomi">
-      <input class="form-input" id="pPrice" type="number" min="0" placeholder="Narx (so'm)">
-      <button class="primary" style="margin:0;padding:12px 14px" id="addProdBtn">+ Qo'shish</button>
+      <input class="form-input" id="pPrice" type="number" min="0" placeholder="Narx (so’m)">
+      <button class="primary" style="margin:0;padding:12px 14px" id="addProdBtn">+ Qo’shish</button>
     </div>
     <input class="form-input" id="pDesc" placeholder="Tavsif (ixtiyoriy)" style="margin-bottom:14px">
     <div id="prodList"><div class="empty">Yuklanmoqda...</div></div>`;
-  $('addProdBtn').addEventListener('click', () => addProduct(id));
+  $('addProdBtn').addEventListener('click',()=>addProduct(id));
 }
 
-async function loadProducts(id) {
-  try {
-    const { ok, data } = await api(`/api/bots/${id}/products`);
-    if (!ok) throw 0;
-    const el = $('prodList');
-    if (!data.length) {
-      el.innerHTML = '<div class="empty">Mahsulotlar yo\'q. Yuqoridan qo\'shing.</div>';
-      return;
-    }
-    el.innerHTML = data.map(p => `
+async function loadProducts(id){
+  try{
+    const {ok,data}=await api(`/api/bots/${id}/products`);
+    if(!ok)throw 0;
+    const el=$('prodList');
+    if(!data.length){el.innerHTML='<div class="empty">Mahsulotlar yo’q. Yuqoridan qo’shing.</div>';return;}
+    el.innerHTML=data.map(p=>`
       <div class="data-item"><div class="row">
-        <div><b>${esc(p.name)}</b> — ${fmtPrice(p.price)}<br><span class="muted">${esc(p.description || '')}</span></div>
-        <button class="btn-danger" onclick="delProduct(${id},${p.id})">O'chirish</button>
+        <div><b>${esc(p.name)}</b> — ${fmtPrice(p.price)}<br><span class="muted">${esc(p.description||'')}</span></div>
+        <button class="btn-danger" onclick="delProduct(${id},${p.id})">O’chirish</button>
       </div></div>`).join('');
-  } catch (e) {
-    $('prodList').innerHTML = '<div class="empty">Yuklab bo\'lmadi.</div>';
-  }
+  }catch(e){$('prodList').innerHTML='<div class="empty">Yuklab bo’lmadi.</div>';}
 }
 
-async function addProduct(id) {
-  const name = $('pName').value.trim();
-  const price = parseInt($('pPrice').value, 10);
-  const desc = $('pDesc').value.trim();
-  if (!name || isNaN(price) || price < 0) {
-    alert("Nom va narxni to'g'ri kiriting.");
-    return;
-  }
-  try {
-    const { ok, data } = await api(`/api/bots/${id}/products`, {
-      method: 'POST',
-      body: JSON.stringify({ name, price, description: desc })
-    });
-    if (!ok) throw new Error(data.detail || "Qo'shilmadi.");
-    $('pName').value = '';
-    $('pPrice').value = '';
-    $('pDesc').value = '';
+async function addProduct(id){
+  const name=$('pName').value.trim(),price=parseInt($('pPrice').value,10),desc=$('pDesc').value.trim();
+  if(!name||isNaN(price)||price<0){alert('Nom va narxni to’g’ri kiriting.');return;}
+  try{
+    const {ok,data}=await api(`/api/bots/${id}/products`,{method:'POST',body:JSON.stringify({name,price,description:desc})});
+    if(!ok)throw new Error(data.detail||'Qo’shilmadi.');
+    $('pName').value='';$('pPrice').value='';$('pDesc').value='';
     await loadProducts(id);
-  } catch (e) {
-    alert('Xatolik: ' + (e.message || "Qo'shilmadi."));
-  }
+  }catch(e){alert('Xatolik: '+(e.message||'Qo’shilmadi.'));}
 }
 
-window.delProduct = async function (botId, pid) {
-  if (!confirm("Mahsulotni o'chirish?")) return;
-  try {
-    const { ok } = await api(`/api/bots/${botId}/products/${pid}`, { method: 'DELETE' });
-    if (!ok) throw 0;
+window.delProduct=async function(botId,pid){
+  if(!confirm('Mahsulotni o’chirish?'))return;
+  try{
+    const {ok}=await api(`/api/bots/${botId}/products/${pid}`,{method:'DELETE'});
+    if(!ok)throw 0;
     await loadProducts(botId);
-  } catch (e) {
-    alert("O'chirilmadi.");
-  }
+  }catch(e){alert('O’chirilmadi.');}
 };
 
-async function loadOrders(id) {
-  try {
-    const { ok, data } = await api(`/api/bots/${id}/orders`);
-    if (!ok) throw 0;
-    const el = $('ordersPanel');
-    if (!data.length) {
-      el.innerHTML = '<div class="empty">Buyurtmalar yo\'q.</div>';
-      return;
-    }
-    el.innerHTML = '<div class="data-list">' + data.map(o => `
+async function loadOrders(id){
+  try{
+    const {ok,data}=await api(`/api/bots/${id}/orders`);
+    if(!ok)throw 0;
+    const el=$('ordersPanel');
+    if(!data.length){el.innerHTML='<div class="empty">Buyurtmalar yo’q.</div>';return;}
+    el.innerHTML='<div class="data-list">'+data.map(o=>`
       <div class="data-item">
-        <div class="row"><b>Buyurtma №${o.id}</b><span class="status ${o.status === 'new' ? 'active' : 'expired'}">${esc(o.status)}</span></div>
-        <div class="muted" style="margin-top:6px">👤 ${esc(o.customer_name || '-')} · 📞 ${esc(o.customer_phone || '-')}</div>
-        <div class="muted" style="margin-top:4px">${esc(o.tg_username || '-')}</div>
-        <div style="margin-top:6px">${(o.items || []).map(i => `• ${esc(i.name)} ×${i.qty} = ${fmtPrice(i.price * i.qty)}`).join('<br>')}</div>
+        <div class="row"><b>Buyurtma №${o.id}</b><span class="status ${o.status==='new'?'active':'expired'}">${esc(o.status)}</span></div>
+        <div class="muted" style="margin-top:6px">👤 ${esc(o.customer_name||'-')} · 📞 ${esc(o.customer_phone||'-')}</div>
+        <div class="muted" style="margin-top:4px">${esc(o.tg_username||'-')}</div>
+        <div style="margin-top:6px">${(o.items||[]).map(i=>`• ${esc(i.name)} ×${i.qty} = ${fmtPrice(i.price*i.qty)}`).join('<br>')}</div>
         <div style="margin-top:6px"><b>Jami: ${fmtPrice(o.total)}</b></div>
-      </div>`).join('') + '</div>';
-  } catch (e) {
-    $('ordersPanel').innerHTML = '<div class="empty">Yuklab bo\'lmadi.</div>';
-  }
+      </div>`).join('')+'</div>';
+  }catch(e){$('ordersPanel').innerHTML='<div class="empty">Yuklab bo’lmadi.</div>';}
 }
 
-async function loadTickets(id) {
-  try {
-    const { ok, data } = await api(`/api/bots/${id}/tickets`);
-    if (!ok) throw 0;
-    if (!data.length) {
-      $('modalBody').innerHTML = '<div class="empty">Hozircha ticketlar yo\'q.</div>';
-      return;
-    }
-    $('modalBody').innerHTML = '<div class="data-list">' + data.map(t => `
+async function loadTickets(id){
+  try{
+    const {ok,data}=await api(`/api/bots/${id}/tickets`);
+    if(!ok)throw 0;
+    if(!data.length){$('modalBody').innerHTML='<div class="empty">Hozircha ticketlar yo’q.</div>';return;}
+    $('modalBody').innerHTML='<div class="data-list">'+data.map(t=>`
       <div class="data-item">
-        <div class="row"><b>Ticket №${t.ticket_no}</b><span class="status ${t.status === 'open' ? 'active' : 'expired'}">${esc(t.status)}</span></div>
-        <div class="muted" style="margin-top:6px">👤 ${esc(t.tg_username || '-')}</div>
+        <div class="row"><b>Ticket №${t.ticket_no}</b><span class="status ${t.status==='open'?'active':'expired'}">${esc(t.status)}</span></div>
+        <div class="muted" style="margin-top:6px">👤 ${esc(t.tg_username||'-')}</div>
         <div style="margin-top:6px">${esc(t.message)}</div>
-      </div>`).join('') + '</div>';
-  } catch (e) {
-    $('modalBody').innerHTML = '<div class="empty">Yuklab bo\'lmadi.</div>';
-  }
+      </div>`).join('')+'</div>';
+  }catch(e){$('modalBody').innerHTML='<div class="empty">Yuklab bo’lmadi.</div>';}
 }
 
-async function loadResults(id) {
-  try {
-    const { ok, data } = await api(`/api/bots/${id}/results`);
-    if (!ok) throw 0;
-    if (!data.length) {
-      $('modalBody').innerHTML = '<div class="empty">Hozircha natijalar yo\'q.</div>';
-      return;
-    }
-    $('modalBody').innerHTML = '<div class="data-list">' + data.map(r => `
+async function loadResults(id){
+  try{
+    const {ok,data}=await api(`/api/bots/${id}/results`);
+    if(!ok)throw 0;
+    if(!data.length){$('modalBody').innerHTML='<div class="empty">Hozircha natijalar yo’q.</div>';return;}
+    $('modalBody').innerHTML='<div class="data-list">'+data.map(r=>`
       <div class="data-item">
-        <div class="row"><b>👤 ${esc(r.tg_username || 'Foydalanuvchi')}</b><span class="status active">${r.score}/${r.total}</span></div>
-        <div class="muted" style="margin-top:4px">${esc((r.created_at || '').slice(0, 16).replace('T', ' '))}</div>
-      </div>`).join('') + '</div>';
-  } catch (e) {
-    $('modalBody').innerHTML = '<div class="empty">Yuklab bo\'lmadi.</div>';
-  }
+        <div class="row"><b>👤 ${esc(r.tg_username||'Foydalanuvchi')}</b><span class="status active">${r.score}/${r.total}</span></div>
+        <div class="muted" style="margin-top:4px">${esc((r.created_at||'').slice(0,16).replace('T',' '))}</div>
+      </div>`).join('')+'</div>';
+  }catch(e){$('modalBody').innerHTML='<div class="empty">Yuklab bo’lmadi.</div>';}
 }
 
-function fmtPrice(p) {
-  return String(p).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + " so'm";
+function fmtPrice(p){return String(p).replace(/\B(?=(\d{3})+(?!\d))/g,' ')+' so’m';}
+function fmtSum(p){return String(p).replace(/\B(?=(\d{3})+(?!\d))/g,' ');}
+
+/* ── Balans + to’lov cheki (mijoz) ── */
+function openBalanceModal(){
+  openModal('💰 Hisob — to\'ldirish');
+  $('modalBody').innerHTML=`
+    <div class="admin-stats" style="margin-bottom:14px">
+      <div class="astat"><small>Joriy balans</small><strong style="color:#ffd49a">${fmtPrice(myBalance)}</strong></div>
+      <div class="astat"><small>1-bot</small><strong style="font-size:14px;color:#79e9b4">Bepul</strong></div>
+      <div class="astat"><small>Keyingi bot narxi</small><strong style="font-size:14px">${pricingInfo?fmtSum(pricingInfo.bot_price):'—'} so’m</strong></div>
+    </div>
+    <div class="section-head" style="margin-bottom:10px"><h2 style="font-size:14px">Hisobni to’ldirish</h2></div>
+    <div class="hint" style="margin-bottom:10px">Summani kiriting va to’lov chekini (skrinshot yoki rasm) yuklang. Admin tekshirib, tasdiqlasa — summa balansga tushadi.</div>
+    <div class="field" style="margin-top:0">
+      <label for="topupAmount">SUMMA (so’m)</label>
+      <input class="form-input" id="topupAmount" type="number" min="1000" placeholder="Masalan: 50000">
+    </div>
+    <div class="field">
+      <label>TO’LOV CHEKI RASMI</label>
+      <label class="drop-area" id="checkDrop">
+        <div id="checkDropText">📷 Rasmni tanlang (JPG, PNG, WEBP — 10 MB gacha)</div>
+        <input type="file" id="checkFile" accept="image/*">
+        <img class="check-preview" id="checkPreview" style="display:none">
+      </label>
+    </div>
+    <button class="primary" id="submitTopupBtn">📤 So’rov yuborish</button>
+    <div id="topupAlert" class="notice" style="margin-top:12px"></div>
+    <div class="section-head" style="margin:18px 0 10px"><h2 style="font-size:14px">To’lovlar tarixi</h2></div>
+    <div id="myTopupsList"><div class="empty">Yuklanmoqda...</div></div>`;
+  const fileInput=$('checkFile');
+  fileInput.addEventListener('change',e=>{
+    const f=e.target.files[0];if(!f)return;
+    const r=new FileReader();r.onload=ev=>{$('checkPreview').src=ev.target.result;$('checkPreview').style.display='block';$('checkDropText').textContent='✓ '+f.name;$('checkDrop').classList.add('has-file');};
+    r.readAsDataURL(f);
+  });
+  $('submitTopupBtn').addEventListener('click',submitTopup);
+  loadMyTopups();
 }
+
+let pendingTopupFile=null;
+async function submitTopup(){
+  const amount=parseInt($('topupAmount').value,10);
+  const file=$('checkFile').files[0];
+  const alert=$('topupAlert');
+  if(!amount||amount<1000){showNotice(alert,'error','Summa 1 000 so\'mdan kam bo\'lmasligi kerak.');return;}
+  if(!file){showNotice(alert,'error','To\'lov cheki rasmini tanlang.');return;}
+  const btn=$('submitTopupBtn');btn.disabled=true;btn.textContent='⏳ Yuborilmoqda...';
+  try{
+    const fd=new FormData();fd.append('amount',amount);fd.append('check',file);
+    const {ok,data}=await apiForm('/api/topup/request',fd);
+    if(!ok||!data.ok)throw new Error(data.error||'So\'rov yuborilmadi.');
+    showNotice(alert,'success','✓ So\'rov yuborildi! Admin tekshirgandan keyin balansingizga tushadi.');
+    $('topupAmount').value='';$('checkFile').value='';$('checkPreview').style.display='none';$('checkDropText').textContent='📷 Rasmni tanlang';$('checkDrop').classList.remove('has-file');
+    await loadMyTopups();
+  }catch(e){showNotice(alert,'error','❌ '+(e.message||'Xatolik.'));}
+  finally{btn.disabled=false;btn.textContent='📤 So\'rov yuborish';}
+}
+
+async function loadMyTopups(){
+  try{
+    const {ok,data}=await api('/api/topup/my');
+    if(!ok)throw 0;myTopups=data;renderMyTopups();
+  }catch(e){$('myTopupsList').innerHTML='<div class="empty">Yuklab bo\'lmadi.</div>';}
+}
+
+function renderMyTopups(){
+  const el=$('myTopupsList');if(!el)return;
+  if(!myTopups.length){el.innerHTML='<div class="empty">Hozircha to\'lov so\'rovlari yo\'q.</div>';return;}
+  el.innerHTML=myTopups.map(t=>`
+    <div class="topup-row">
+      <div><span class="amt">${fmtPrice(t.amount)}</span><div class="muted" style="font-size:10px;margin-top:3px">${esc(t.created_at)}${t.admin_note?` · ${esc(t.admin_note)}`:''}</div></div>
+      <span class="status-tag ${t.status}">${t.status==='pending'?'Kutilmoqda':(t.status==='approved'?'Tasdiqlandi':'Rad etildi')}</span>
+    </div>`).join('');
+}
+
+/* ── Inbox + admin suhbat (mijoz) ── */
+async function updateInboxBadge(){
+  try{
+    const {ok,data}=await api('/api/inbox');
+    if(!ok)return;
+    inboxData=data;
+    const unread=data.unread_admin_messages;
+    const badge=$('inboxBadge');
+    if(unread>0){badge.textContent=unread;badge.style.display='grid';}else{badge.style.display='none';}
+  }catch(e){}
+}
+
+function openInbox(){
+  openModal('📨 Xabarlar — admin bilan suhbat');
+  $('modalBody').innerHTML=`
+    <div class="inbox-section">
+      <h4>📢 Admin xabarlari (ommaviy)</h4>
+      <div id="broadcastsBox"><div class="empty">Yuklanmoqda...</div></div>
+    </div>
+    <div class="inbox-section">
+      <h4>💬 Admin bilan suhbat</h4>
+      <div class="chat-thread" id="chatThread"><div class="empty">Yuklanmoqda...</div></div>
+      <div class="chat-input-row">
+        <input class="form-input" id="chatReplyInput" placeholder="Xabar yozing..." maxlength="2000">
+        <button class="primary" id="chatSendBtn" style="max-width:120px;margin:0">➤ Yuborish</button>
+      </div>
+    </div>`;
+  $('chatSendBtn').addEventListener('click',sendToAdmin);
+  $('chatReplyInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendToAdmin();});
+  loadInbox();
+}
+
+async function loadInbox(){
+  await updateInboxBadge();   // inboxData yangilanadi
+  renderBroadcasts();
+  await loadChatThread();
+}
+
+function renderBroadcasts(){
+  const el=$('broadcastsBox');if(!el)return;
+  const list=(inboxData&&inboxData.broadcasts)||[];
+  if(!list.length){el.innerHTML='<div class="empty">Hozircha ommaviy xabarlar yo\'q.</div>';return;}
+  el.innerHTML=list.map(b=>`<div class="broadcast-item"><div class="meta">📢 Admin · ${esc(b.created_at)}</div>${esc(b.body)}</div>`).join('');
+}
+
+async function loadChatThread(){
+  const el=$('chatThread');if(!el)return;
+  try{
+    const {ok,data}=await api('/api/chat/admin/messages');
+    if(!ok)throw 0;chatMessages=data;renderChatThread();
+    await updateInboxBadge();
+  }catch(e){el.innerHTML='<div class="empty">Suhbatni yuklab bo\'lmadi.</div>';}
+}
+
+function renderChatThread(){
+  const el=$('chatThread');if(!el)return;
+  if(!chatMessages.length){el.innerHTML='<div class="empty">Suhbat yo\'q. Admin bilan bog\'lanish uchun xabar yozing.</div>';return;}
+  el.innerHTML=chatMessages.map(m=>`<div class="chat-bubble ${m.is_mine?'mine':'theirs'}">${esc(m.body)}<span class="ts">${esc(m.created_at)}</span></div>`).join('');
+  el.scrollTop=el.scrollHeight;
+}
+
+async function sendToAdmin(){
+  const inp=$('chatReplyInput');const body=inp.value.trim();
+  if(!body)return;
+  const btn=$('chatSendBtn');btn.disabled=true;
+  try{
+    const {ok,data}=await api('/api/chat/admin',{method:'POST',body:JSON.stringify({body})});
+    if(!ok||!data.ok)throw new Error(data.detail||'Yuborilmadi.');
+    inp.value='';await loadChatThread();
+  }catch(e){alert('Xatolik: '+(e.message||'Yuborilmadi.'));}
+  finally{btn.disabled=false;}
+}
+
+/* ── Admin: to’lov cheklarini ko’rib chiqish ── */
+async function loadAdminTopups(){
+  try{
+    const {ok,data}=await api('/api/admin/topups?status_filter='+topupFilter);
+    if(!ok)throw 0;adminTopups=data;renderAdminTopups();
+    // Pending badge (faqat stats yuklaganda ham yangilanadi — qo’shimcha yangilash).
+    const pending=await api('/api/admin/topups?status_filter=pending');
+    if(pending.ok){const pb=$('pendingBadge');if(pending.data.length>0){pb.textContent=pending.data.length;pb.style.display='grid';}else{pb.style.display='none';}}
+  }catch(e){$('adminTopupsContainer').innerHTML='<div class="empty">Yuklab bo\'lmadi.</div>';}
+}
+
+function renderAdminTopups(){
+  const el=$('adminTopupsContainer');
+  if(!adminTopups.length){el.innerHTML=`<div class="empty">${topupFilter==='all'?'To\'lov so\'rovlari yo\'q.':'Bu holatda so\'rovlar yo\'q.'}</div>`;return;}
+  el.innerHTML='<div class="data-list">'+adminTopups.map(t=>`
+    <div class="topup-row" style="align-items:flex-start;flex-wrap:wrap">
+      <div style="flex:1;min-width:200px">
+        <div><span class="amt">${fmtPrice(t.amount)}</span> <span class="status-tag ${t.status}">${t.status==='pending'?'Kutilmoqda':(t.status==='approved'?'Tasdiqlandi':'Rad etildi')}</span></div>
+        <div class="muted" style="margin-top:4px;font-size:11px">👤 ${esc(t.username)} · ${esc(t.created_at)}${t.reviewed_at?` · ko’rilgan: ${esc(t.reviewed_at)}`:''}</div>
+        ${t.admin_note?`<div class="muted" style="margin-top:3px;font-size:11px">Izoh: ${esc(t.admin_note)}</div>`:''}
+      </div>
+      <div class="topup-check-cell">
+        <img class="check-thumb" src="/api/admin/topups/${t.id}/check" onclick="viewCheck(${t.id})" alt="chek">
+        ${t.status==='pending'?`
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <button class="btn-sm" style="background:#1a4938;color:#79e9b4;border-color:#286e54" onclick="approveTopup(${t.id})">✓ Tasdiqlash</button>
+            <button class="btn-sm danger" onclick="rejectTopup(${t.id})">✕ Rad etish</button>
+          </div>`:''}
+      </div>
+    </div>`).join('')+'</div>';
+}
+
+window.viewCheck=function(id){
+  openModal('🧾 To’lov cheki');
+  $('modalBody').innerHTML=`<img src="/api/admin/topups/${id}/check" style="width:100%;border-radius:12px;border:1px solid var(--line)">`;
+};
+
+window.approveTopup=async function(id){
+  const note=prompt('Tasdiqlash izohi (ixtiyoriy):','')||'';
+  try{
+    const {ok,data}=await api(`/api/admin/topups/${id}/approve`,{method:'POST',body:JSON.stringify({admin_note:note})});
+    if(!ok)throw new Error(data.detail||'Tasdiqlanmadi.');
+    await loadAdminTopups();await loadAdminStats();
+  }catch(e){alert('Xatolik: '+(e.message||'Tasdiqlanmadi.'));}
+};
+
+window.rejectTopup=async function(id){
+  const note=prompt('Rad etish sababi (ixtiyoriy):','')||'';
+  if(!confirm('Rad etishni tasdiqlaysizmi?'))return;
+  try{
+    const {ok,data}=await api(`/api/admin/topups/${id}/reject`,{method:'POST',body:JSON.stringify({admin_note:note})});
+    if(!ok)throw new Error(data.detail||'Rad etilmadi.');
+    await loadAdminTopups();
+  }catch(e){alert('Xatolik: '+(e.message||'Rad etilmadi.'));}
+};
+
+/* Topup filtri tablari */
+document.querySelectorAll('[data-topup-filter]').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('[data-topup-filter]').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');topupFilter=t.dataset.topupFilter;loadAdminTopups();
+}));
+
+/* ── Admin: narx sozlamalari ── */
+async function loadAdminSettings(){
+  try{
+    const {ok,data}=await api('/api/admin/settings');
+    if(!ok)throw 0;adminSettings=data;
+    $('setBotPrice').value=data.bot_price;
+    $('setTrialDays').value=data.bot_trial_days;
+    $('setPaidDays').value=data.paid_bot_days;
+  }catch(e){}
+}
+
+async function saveSettings(){
+  const btn=$('saveSettingsBtn');btn.disabled=true;btn.textContent='⏳...';
+  const alert=$('settingsAlert');
+  const payload={
+    bot_price:parseInt($('setBotPrice').value,10),
+    bot_trial_days:parseInt($('setTrialDays').value,10),
+    paid_bot_days:parseInt($('setPaidDays').value,10),
+  };
+  try{
+    const {ok,data}=await api('/api/admin/settings',{method:'POST',body:JSON.stringify(payload)});
+    if(!ok)throw new Error(data.detail||'Saqlanmadi.');
+    showNotice(alert,'success','✓ Sozlamalar saqlandi.');
+    await loadPricing();
+  }catch(e){showNotice(alert,'error','❌ '+(e.message||'Saqlanmadi.'));}
+  finally{btn.disabled=false;btn.textContent='💾 Saqlash';}
+}
+
+/* ── Admin: ommaviy xabar (broadcast) ── */
+async function sendBroadcast(){
+  const inp=$('broadcastInput');const body=inp.value.trim();
+  const alert=$('broadcastAlert');
+  if(!body){showNotice(alert,'error','Xabar matnini kiriting.');return;}
+  const btn=$('sendBroadcastBtn');btn.disabled=true;btn.textContent='⏳...';
+  try{
+    const {ok,data}=await api('/api/admin/broadcast',{method:'POST',body:JSON.stringify({body})});
+    if(!ok||!data.ok)throw new Error(data.detail||'Yuborilmadi.');
+    showNotice(alert,'success',`✓ Xabar ${data.recipients} ta foydalanuvchiga yuborildi.`);
+    inp.value='';await loadBroadcasts();
+  }catch(e){showNotice(alert,'error','❌ '+(e.message||'Yuborilmadi.'));}
+  finally{btn.disabled=false;btn.textContent='📨 Yuborish';}
+}
+
+async function loadBroadcasts(){
+  try{
+    const {ok,data}=await api('/api/admin/broadcasts');
+    if(!ok)throw 0;adminBroadcasts=data;renderAdminBroadcasts();
+  }catch(e){$('broadcastsContainer').innerHTML='<div class="empty">Yuklab bo\'lmadi.</div>';}
+}
+
+function renderAdminBroadcasts(){
+  const el=$('broadcastsContainer');if(!el)return;
+  if(!adminBroadcasts.length){el.innerHTML='<div class="empty">Hozircha xabarlar yo\'q.</div>';return;}
+  el.innerHTML=adminBroadcasts.map(b=>`<div class="broadcast-list-item"><div class="meta">📢 ${esc(b.admin_username)} · ${esc(b.created_at)}</div>${esc(b.body)}</div>`).join('');
+}
+
+/* ── Admin: suhbatlar ── */
+async function loadAdminChats(){
+  try{
+    const {ok,data}=await api('/api/admin/chats');
+    if(!ok)throw 0;adminChats=data;renderAdminChats();
+    const totalUnread=adminChats.reduce((s,t)=>s+(t.unread||0),0);
+    const badge=$('chatBadge');if(totalUnread>0){badge.textContent=totalUnread;badge.style.display='grid';}else{badge.style.display='none';}
+  }catch(e){$('adminChatsContainer').innerHTML='<div class="empty">Yuklab bo\'lmadi.</div>';}
+}
+
+function renderAdminChats(){
+  const el=$('adminChatsContainer');
+  const q=($('adminChatSearch')||{value:''}).value.toLowerCase();
+  const filtered=adminChats.filter(t=>t.username.toLowerCase().includes(q));
+  if(!filtered.length){el.innerHTML=`<div class="empty">${adminChats.length?'Topilmadi.':'Hozircha suhbatlar yo\'q.'}</div>`;return;}
+  el.innerHTML=filtered.map(t=>`
+    <div class="thread-item" onclick="openAdminChat(${t.id},'${esc(t.username)}')">
+      <div class="thread-avatar">${esc(t.username[0].toUpperCase())}</div>
+      <div class="thread-meta"><b>${esc(t.username)}</b><small>${t.last_body?esc(t.last_body.slice(0,60)):'—'} · ${esc(t.last_at||'')}</small></div>
+      ${t.unread>0?`<span class="thread-unread">${t.unread}</span>`:''}
+    </div>`).join('');
+}
+
+window.openAdminChat=function(uid,name){
+  chatPartner={id:uid,name};
+  openModal('💬 Suhbat: '+name);
+  $('modalBody').innerHTML=`
+    <div class="chat-thread" id="adminChatThread" style="max-height:50vh"><div class="empty">Yuklanmoqda...</div></div>
+    <div class="chat-input-row" style="margin-top:14px">
+      <input class="form-input" id="adminChatInput" placeholder="Javob yozing..." maxlength="2000">
+      <button class="primary" id="adminChatSend" style="max-width:120px;margin:0">➤ Yuborish</button>
+    </div>`;
+  $('adminChatSend').addEventListener('click',adminReply);
+  $('adminChatInput').addEventListener('keydown',e=>{if(e.key==='Enter')adminReply();});
+  loadAdminChatThread(uid);
+};
+
+async function loadAdminChatThread(uid){
+  const el=$('adminChatThread');if(!el)return;
+  try{
+    const {ok,data}=await api(`/api/admin/chats/${uid}`);
+    if(!ok)throw 0;
+    el.innerHTML=data.messages.length?data.messages.map(m=>`<div class="chat-bubble ${m.is_mine?'mine':'theirs'}">${esc(m.body)}<span class="ts">${esc(m.created_at)}</span></div>`).join(''):'<div class="empty">Xabarlar yo\'q.</div>';
+    el.scrollTop=el.scrollHeight;
+    await loadAdminChats();
+  }catch(e){el.innerHTML='<div class="empty">Yuklab bo\'lmadi.</div>';}
+}
+
+async function adminReply(){
+  if(!chatPartner)return;
+  const inp=$('adminChatInput');const body=inp.value.trim();if(!body)return;
+  const btn=$('adminChatSend');btn.disabled=true;
+  try{
+    const {ok,data}=await api(`/api/admin/chats/${chatPartner.id}`,{method:'POST',body:JSON.stringify({body})});
+    if(!ok||!data.ok)throw new Error(data.detail||'Yuborilmadi.');
+    inp.value='';await loadAdminChatThread(chatPartner.id);
+  }catch(e){alert('Xatolik: '+(e.message||'Yuborilmadi.'));}
+  finally{btn.disabled=false;}
+}
+
+$('adminChatSearch')&&$('adminChatSearch').addEventListener('input',renderAdminChats);
+$('saveSettingsBtn').addEventListener('click',saveSettings);
+$('sendBroadcastBtn').addEventListener('click',sendBroadcast);
 
 /* ── Init ── */
 checkSession();
